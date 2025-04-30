@@ -27,7 +27,9 @@ public class MoteurDeMatching {
 
         // Nettoyer les noms en utilisant le prétraiteur
         Nom nom1 = listNoms.getFirst();
+        listNoms.removeFirst();
         Nom nom2 = listNoms.getFirst();
+        listNoms.removeFirst();
         Nom nom3 = listNoms.getFirst();
 
         nom1 = pretraiteur.nettoyer(nom1);
