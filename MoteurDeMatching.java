@@ -1,11 +1,12 @@
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class MoteurDeMatching {
     // Composition : comparateur est créé directement ici
     private final ComparateurNoms comparateur;
 
-    // Agrégation : prétraiteur et selectionneur sont passés en argument du constructeur
+    // Agrégation : prétraiteur et selectionneur sont passés en argument du
+    // constructeur
     private Pretraiteur pretraiteur;
     private Selectionneur selectionneur;
 
@@ -13,41 +14,35 @@ public class MoteurDeMatching {
     public MoteurDeMatching(Pretraiteur pretraiteur, Selectionneur selectionneur) {
         this.pretraiteur = pretraiteur;
         this.selectionneur = selectionneur;
-
         // Composition : création directe du comparateur
         this.comparateur = new ComparateurExact(); // ou une autre implémentation selon ton choix
     }
 
     // Méthode pour effectuer le matching
-    public void effectuerMatching() {
+    public void effectuerMatching(List<Nom> listNoms) {
         // Créer une instance de Recherche avec prétraiteur et comparateur
         Rechercher recherche = new Rechercher(pretraiteur, comparateur);
 
         // Créer des objets Nom avec des chaînes "brutes"
-        Nom nomBrut1 = new Nom(" mouheb   khouildi ");
-        Nom nomBrut2 = new Nom("mouhebkhouildi");
-        Nom nomBrut3 = new Nom("yacine boujelbane");
 
         // Nettoyer les noms en utilisant le prétraiteur
-        Nom nom1 = pretraiteur.nettoyer(nomBrut1);
-        Nom nom2 = pretraiteur.nettoyer(nomBrut2);
-        Nom nom3 = pretraiteur.nettoyer(nomBrut3);
+        Nom nom1 = listNoms.getFirst();
+        Nom nom2 = listNoms.getFirst();
+        Nom nom3 = listNoms.getFirst();
 
-        System.out.println("nomBrut1 apres nettoyage :" + nom1  );
-        System.out.println("nomBrut2 apres nettoyage :" + nom2  );
-        System.out.println("nomBrut3 apres nettoyage :" + nom3  );
+        nom1 = pretraiteur.nettoyer(nom1);
+        nom2 = pretraiteur.nettoyer(nom2);
+        nom3 = pretraiteur.nettoyer(nom3);
 
-        // Créer une liste de noms
-        List<Nom> listeNoms = new ArrayList<>();
-        listeNoms.add(nom1);
-        listeNoms.add(nom2);
-        listeNoms.add(nom3);
+        System.out.println("nomBrut1 apres nettoyage :" + nom1);
+        System.out.println("nomBrut2 apres nettoyage :" + nom2);
+        System.out.println("nomBrut3 apres nettoyage :" + nom3);
 
         // Nom cible à rechercher
         Nom nomCible = new Nom(" kodskhouildi ");
 
         // Effectuer la recherche
-        Nom resultat = recherche.rechercher(nomCible, listeNoms);
+        Nom resultat = recherche.rechercher(nomCible, listNoms);
 
         // Afficher le résultat
         if (resultat != null) {
@@ -68,8 +63,6 @@ public class MoteurDeMatching {
         Nom nom1 = pretraiteur.nettoyer(nomBrut1);
         Nom nom2 = pretraiteur.nettoyer(nomBrut2);
         Nom nom3 = pretraiteur.nettoyer(nomBrut3);
-
-
 
         // Utiliser le comparateur pour comparer les noms
         double resultat1 = comparateur.comparer(nom1, nom2); // Devrait retourner 1.0 car les noms sont identiques
