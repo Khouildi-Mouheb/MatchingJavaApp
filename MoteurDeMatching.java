@@ -62,39 +62,28 @@ public class MoteurDeMatching {
     }
 
     // Méthode pour tester le ComparateurExact
-    public void comparer() {
-        // Créer des objets Nom pour le test
-        Nom nomBrut1 = new Nom(" mouheb   khouildi");
-        Nom nomBrut2 = new Nom("mouhebkhouildi");
-        Nom nomBrut3 = new Nom("yacine boujelbane");
+    public void comparer(List<Nom> listNoms2, List<Nom> listNoms) {
+        // Map<Nom, Double> resultat;
+        double somme = 0.0;
+        double score = 0.0;
+        for (Nom nom : listNoms2) {
 
-        // Nettoyer les noms en utilisant le prétraiteur
-        Nom nom1 = pretraiteur.nettoyer(nomBrut1);
-        Nom nom2 = pretraiteur.nettoyer(nomBrut2);
-        Nom nom3 = pretraiteur.nettoyer(nomBrut3);
+            score = 0.0;
+            for (Nom nom2 : listNoms) {
+                if (comparateur.comparer(nom, nom2) > score) {
+                    score = comparateur.comparer(nom, nom2);
+                }
+                score = comparateur.comparer(nom, nom2);
+                System.out.println("Comparaison entre " + nom.getNom() + " et " + nom2.getNom() + ": "
+                        + comparateur.comparer(nom, nom2));
+                // resultat.put(nom, score);
 
-        // Utiliser le comparateur pour comparer les noms
-        double resultat1 = comparateur.comparer(nom1, nom2); // Devrait retourner 1.0 car les noms sont identiques
-        double resultat2 = comparateur.comparer(nom1, nom3); // Devrait retourner 0.0 car les noms sont différents
+            }
+            somme += score;
 
-        // Afficher les résultats du test
-        System.out.println("Comparaison de " + nomBrut1.getNom() + " et " + nomBrut2.getNom() + " : " + resultat1); // 1.0
-        System.out.println("Comparaison de " + nom1.getNom() + " et " + nom3.getNom() + " : " + resultat2); // 0.0
-
-        // Vérification des résultats
-        if (resultat1 == 1.0) {
-            System.out.println("Test de comparaison réussi pour les noms identiques.");
-        } else {
-            System.out.println("Test de comparaison échoué pour les noms identiques.");
         }
+        System.out.println("La somme des scores est : " + somme / listNoms2.size());
+        // return resultat;
 
-        if (resultat2 == 0.0) {
-            System.out.println("Test de comparaison réussi pour les noms différents.");
-        } else {
-            System.out.println("Test de comparaison échoué pour les noms différents.");
-        }
     }
-
-    // Méthode main pour exécuter le test
-
 }

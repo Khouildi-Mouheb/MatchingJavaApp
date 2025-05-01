@@ -12,14 +12,23 @@ public class Main {
         Recuperateur recuperateur = new Recuperateur__statique();
         // on doit ajouter une autre atribus pour le moteur qui est la liste vièrge
         List<Nom> listeNoms = recuperateur.recuperer();
+        List<Nom> listeNoms2 = recuperateur.recuperer();
         // Créer une instance du moteur de matching
         MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur);
-
+        System.out.println("------------------------Matching_App-------------------------");
+        System.out.println("-------------------------------------------------");
+        System.out.println("-La Comparaison entre les noms est en cours-");
         // Appeler la méthode de test pour ComparateurExact
-        moteur.comparer();
+        moteur.comparer(listeNoms2, listeNoms);
+        System.out.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
+        System.out.println("-La recherche entre les noms est en cours-");
 
         // Appeler la méthode de test pour effectuer le matching
         Map<Nom, Double> resultat = moteur.rechercher(listeNoms);
+        System.out.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
+        System.out.println("-Affichage de la resultat du recherche apres la selection: -");
 
         // Afficher les résultats du matching
         selectionneur.selectionner(resultat);
