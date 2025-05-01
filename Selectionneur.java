@@ -1,5 +1,7 @@
-import java.util.List;
+
+import java.util.Map;
+
 public interface Selectionneur {
     // Correct the method signature here
-    public Nom selectionner(List<Nom> candidats); // It should accept a list of Nom
+    public void selectionner(Map<Nom, Double> resultat);
 }

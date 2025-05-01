@@ -1,6 +1,6 @@
-public class ComparateurExact implements ComparateurNoms {
+public class ComparateurExact implements Comparateur {
     @Override
-    public double comparer(Nom nom1, Nom nom2) {
-        return nom1.getNom().equals(nom2.getNom()) ? 1.0 : 0.0;
+    public double comparer(String nom1, String nom2) {
+        return nom1.equals(nom2) ? 1.0 : 0.0;
     }
 }

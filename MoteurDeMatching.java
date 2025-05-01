@@ -1,25 +1,27 @@
 
 import java.util.List;
+import java.util.Map;
 
 public class MoteurDeMatching {
     // Composition : comparateur est créé directement ici
-    private final ComparateurNoms comparateur;
+    private ComparateurNoms comparateur;
 
     // Agrégation : prétraiteur et selectionneur sont passés en argument du
     // constructeur
     private Pretraiteur pretraiteur;
-    private Selectionneur selectionneur;
+    private List<Nom> listeNom = new java.util.ArrayList<>();
 
     // Constructeur
-    public MoteurDeMatching(Pretraiteur pretraiteur, Selectionneur selectionneur) {
+    public MoteurDeMatching(Pretraiteur pretraiteur, ComparateurNoms comparateur) {
         this.pretraiteur = pretraiteur;
-        this.selectionneur = selectionneur;
+        this.comparateur = comparateur;
         // Composition : création directe du comparateur
-        this.comparateur = new ComparateurExact(); // ou une autre implémentation selon ton choix
+        this.comparateur = new ComparateurNoms_simple(); // ou une autre implémentation selon ton choix
     }
 
     // Méthode pour effectuer le matching
-    public void effectuerMatching(List<Nom> listNoms) {
+    public Map<Nom, Double> rechercher(List<Nom> listNoms) {
+
         // Créer une instance de Recherche avec prétraiteur et comparateur
         Rechercher recherche = new Rechercher(pretraiteur, comparateur);
 
@@ -27,10 +29,14 @@ public class MoteurDeMatching {
 
         // Nettoyer les noms en utilisant le prétraiteur
         Nom nom1 = listNoms.getFirst();
+        listeNom.add(nom1);
         listNoms.removeFirst();
+
         Nom nom2 = listNoms.getFirst();
+        listeNom.add(nom2);
         listNoms.removeFirst();
         Nom nom3 = listNoms.getFirst();
+        listeNom.add(nom3);
 
         nom1 = pretraiteur.nettoyer(nom1);
         nom2 = pretraiteur.nettoyer(nom2);
@@ -41,21 +47,22 @@ public class MoteurDeMatching {
         System.out.println("nomBrut3 apres nettoyage :" + nom3);
 
         // Nom cible à rechercher
-        Nom nomCible = new Nom(" kodskhouildi ");
+        Nom nomCible = new Nom("yacine boujelbane");
 
         // Effectuer la recherche
-        Nom resultat = recherche.rechercher(nomCible, listNoms);
+        Map<Nom, Double> resultat = recherche.rechercher(nomCible, listeNom);
+        for (Map.Entry<Nom, Double> entry : resultat.entrySet()) {
+            Nom nom = entry.getKey();
+            double score = entry.getValue();
+            System.out.println("Nom : " + nom.getNom() + ", Score : " + score);
 
-        // Afficher le résultat
-        if (resultat != null) {
-            System.out.println("Nom trouvé : " + resultat);
-        } else {
-            System.out.println("Nom non trouvé.");
         }
+        return resultat;
+
     }
 
     // Méthode pour tester le ComparateurExact
-    public void testerComparateurExact() {
+    public void comparer() {
         // Créer des objets Nom pour le test
         Nom nomBrut1 = new Nom(" mouheb   khouildi");
         Nom nomBrut2 = new Nom("mouhebkhouildi");

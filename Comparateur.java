@@ -1,3 +1,3 @@
 public interface Comparateur {
-    public boolean compare(Comparateur c1, Comparateur c2);
+    public double comparer(String nom1, String nom2);
 }
