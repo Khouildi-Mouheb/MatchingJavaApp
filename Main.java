@@ -15,7 +15,7 @@ public class Main {
         List<Nom> listeNoms2 = recuperateur.recuperer();
         // Créer une instance du moteur de matching
         MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur);
-        System.out.println("------------------------Matching_App-------------------------");
+        System.out.println("-------------------Matching_App------------------");
         System.out.println("-------------------------------------------------");
         System.out.println("-La Comparaison entre les noms est en cours-");
         // Appeler la méthode de test pour ComparateurExact
