@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recuperateur__statique implements Recuperateur {
+public class RecuperateurStatique implements Recuperateur {
     Nom nomBrut1 = new Nom(" khouildi mouheb");
     Nom nomBrut2 = new Nom("mouhebkhouildi");
     Nom nomBrut3 = new Nom("yacine boujelbane");

@@ -5,11 +5,11 @@ public class Main {
     public static void main(String[] args) {
         // Créer les dépendances pour le prétraiteur et le sélectionneur
         Pretraiteur pretraiteur = new PretraiteurNormalisation();
-        ComparateurNoms comparateur = new ComparateurNoms_simple();
+        ComparateurNoms comparateur = new ComparateurNomsSimple();
         Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.5); // Exemple d'utilisation d'un seuil
         // içi j'ajoute un exemple de recuperateur qui fonctionne avec une liste static
         // qui j'ai genèré
-        Recuperateur recuperateur = new Recuperateur__statique();
+        Recuperateur recuperateur = new RecuperateurStatique();
         // on doit ajouter une autre atribus pour le moteur qui est la liste vièrge
         List<Nom> listeNoms = recuperateur.recuperer();
         List<Nom> listeNoms2 = recuperateur.recuperer();

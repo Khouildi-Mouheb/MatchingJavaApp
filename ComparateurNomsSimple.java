@@ -1,4 +1,4 @@
-public class ComparateurNoms_simple implements ComparateurNoms {
+public class ComparateurNomsSimple implements ComparateurNoms {
     Comparateur comparateur = new ComparateurExact();
 
     @Override

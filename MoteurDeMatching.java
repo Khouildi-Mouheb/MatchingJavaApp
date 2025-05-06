@@ -16,7 +16,7 @@ public class MoteurDeMatching {
         this.pretraiteur = pretraiteur;
         this.comparateur = comparateur;
         // Composition : création directe du comparateur
-        this.comparateur = new ComparateurNoms_simple(); // ou une autre implémentation selon ton choix
+        this.comparateur = new ComparateurNomsSimple(); // ou une autre implémentation selon ton choix
     }
 
     // Méthode pour effectuer le matching
