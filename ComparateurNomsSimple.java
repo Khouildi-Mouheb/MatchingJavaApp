@@ -1,6 +1,10 @@
 
 public class ComparateurNomsSimple implements ComparateurNoms {
-    Comparateur comparateur = new ComparateurExact();
+    Comparateur comparateur;
+
+    ComparateurNomsSimple(Comparateur comparateur) {
+        this.comparateur = comparateur;
+    }
 
     @Override
     public double comparer(Nom nom1, Nom nom2) {

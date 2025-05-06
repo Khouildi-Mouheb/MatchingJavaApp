@@ -5,6 +5,7 @@ import java.util.Map;
 public class MoteurDeMatching {
     // Composition : comparateur est créé directement ici
     private ComparateurNoms comparateur;
+    private Comparateur comparateurDeChaine;
 
     // Agrégation : prétraiteur et selectionneur sont passés en argument du
     // constructeur
@@ -12,11 +13,10 @@ public class MoteurDeMatching {
     private List<Nom> listeNom = new java.util.ArrayList<>();
 
     // Constructeur
-    public MoteurDeMatching(Pretraiteur pretraiteur, ComparateurNoms comparateur) {
+    public MoteurDeMatching(Pretraiteur pretraiteur, ComparateurNoms comparateur, Comparateur comparateurDeChaine) {
         this.pretraiteur = pretraiteur;
         this.comparateur = comparateur;
-        // Composition : création directe du comparateur
-        this.comparateur = new ComparateurNomsSimple(); // ou une autre implémentation selon ton choix
+        this.comparateurDeChaine = comparateurDeChaine; // ou une autre implémentation selon ton choix
     }
 
     // Méthode pour effectuer le matching
