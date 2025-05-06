@@ -1,3 +1,4 @@
+
 public class ComparateurNomsSimple implements ComparateurNoms {
     Comparateur comparateur = new ComparateurExact();
 
