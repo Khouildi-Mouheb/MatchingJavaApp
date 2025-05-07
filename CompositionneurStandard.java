@@ -12,7 +12,7 @@ public class CompositionneurStandard implements CompositionneurDeNom {
         return result;
     }
 
-    // deux méthodes statiques pour générer les permutations qui sont importées
+    // deux méthodes statiques importées pour générer les permutations
 
     private static void permute(String[] words, int start, List<Nom> result) {
         Nom nom = new Nom("");

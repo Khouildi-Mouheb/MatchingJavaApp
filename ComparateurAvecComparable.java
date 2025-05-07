@@ -1,6 +1,4 @@
-public class ComparateurAvecComparable implements Comparable<Nom> , Comparateur {
-
-    
+public class ComparateurAvecComparable implements Comparable<Nom>, Comparateur {
 
     @Override
     public int compareTo(Nom nomAComparer) {
@@ -11,11 +9,10 @@ public class ComparateurAvecComparable implements Comparable<Nom> , Comparateur 
         }
     }
 
-
-    //how can  ignore the implementation ?
+    // how can ignore the implementation ?
     @Override
     public double comparer(String nom1, String nom2) {
-        return 0.0; // Si l'un des noms est null, retourner 0.0
+        return nom1.compareTo(nom2); // Si l'un des noms est null, retourner 0.0
     }
 
 }
