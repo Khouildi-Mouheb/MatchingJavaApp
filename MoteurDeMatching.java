@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class MoteurDeMatching {
     // Composition : comparateur est créé directement ici
-    private ComparateurNoms comparateur;
-    private Comparateur comparateurDeChaine;
+    private ComparateurNoms comparateurDeNom;
+    private GenerateurDeCondidat generateur;
 
     // Agrégation : prétraiteur et selectionneur sont passés en argument du
     // constructeur
@@ -13,17 +13,20 @@ public class MoteurDeMatching {
     private List<Nom> listeNom = new java.util.ArrayList<>();
 
     // Constructeur
-    public MoteurDeMatching(Pretraiteur pretraiteur, ComparateurNoms comparateur, Comparateur comparateurDeChaine) {
+    public MoteurDeMatching(Pretraiteur pretraiteur, ComparateurNoms comparateurDeNom,
+            GenerateurDeCondidat generateur) {
+
+        this.generateur = generateur;
         this.pretraiteur = pretraiteur;
-        this.comparateur = comparateur;
-        this.comparateurDeChaine = comparateurDeChaine; // ou une autre implémentation selon ton choix
+        this.comparateurDeNom = comparateurDeNom;
+        // ou une autre implémentation selon ton choix
     }
 
     // Méthode pour effectuer le matching
     public Map<Nom, Double> rechercher(List<Nom> listNoms) {
 
         // Créer une instance de Recherche avec prétraiteur et comparateur
-        Rechercher recherche = new Rechercher(pretraiteur, comparateur);
+        Rechercher recherche = new Rechercher(pretraiteur, comparateurDeNom);
 
         // Créer des objets Nom avec des chaînes "brutes"
 
@@ -63,19 +66,25 @@ public class MoteurDeMatching {
 
     // Méthode pour tester le ComparateurExact
     public void comparer(List<Nom> listNoms2, List<Nom> listNoms) {
+        List<Nom> temp = new java.util.ArrayList<>();
         // Map<Nom, Double> resultat;
         double somme = 0.0;
         double score = 0.0;
         for (Nom nom : listNoms2) {
 
+            if (generateur != null) {
+                temp = generateur.genererCondidat(nom, listNoms);
+            } else {
+                temp = listNoms;
+            }
             score = 0.0;
-            for (Nom nom2 : listNoms) {
-                if (comparateur.comparer(nom, nom2) > score) {
-                    score = comparateur.comparer(nom, nom2);
+            for (Nom nom2 : temp) {
+                if (comparateurDeNom.comparer(nom, nom2) > score) {
+                    score = comparateurDeNom.comparer(nom, nom2);
                 }
-                score = comparateur.comparer(nom, nom2);
+                score = comparateurDeNom.comparer(nom, nom2);
                 System.out.println("Comparaison entre " + nom.getNom() + " et " + nom2.getNom() + ": "
-                        + comparateur.comparer(nom, nom2));
+                        + comparateurDeNom.comparer(nom, nom2));
                 // resultat.put(nom, score);
 
             }
@@ -83,7 +92,5 @@ public class MoteurDeMatching {
 
         }
         System.out.println("La somme des scores est : " + somme / listNoms2.size());
-        // return resultat;
-
     }
 }

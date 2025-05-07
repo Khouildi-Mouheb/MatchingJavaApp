@@ -6,7 +6,7 @@ public class Main {
         // Créer les dépendances pour le prétraiteur et le sélectionneur
         Pretraiteur pretraiteur = new PretraiteurNormalisation();
         Comparateur comparateurExact = new ComparateurExact();
-        ComparateurNoms comparateur = new ComparateurNomsSimple(comparateurExact);
+        // ComparateurNoms comparateur = new ComparateurNomsSimple(comparateurExact);
         Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.5); // Exemple d'utilisation d'un seuil
 
         // içi j'ajoute un exemple de recuperateur qui fonctionne avec une liste static
@@ -16,12 +16,14 @@ public class Main {
         // on doit ajouter une autre atribus pour le moteur qui est la liste vièrge
         List<Nom> listeNoms = recuperateur.recuperer();
         List<Nom> listeNoms2 = recuperateur.recuperer();
-        // GenerateurDeCandidat generateur = new GenerateurStandard();
-        // GenerateurDeCandidat generateur = new GenerateurParTaille();
-        GenerateurDeCandidat generateur2 = new GenerateurStandard();
-        ComparateurNoms comparateur2 = new ComparteurNomsGeneralist(comparateur, generateur2);
+        GenerateurDeCondidat generateur = new GenerateurParTaille();
+
+        CompositionneurDeNom compositionneur = new CompositionneurStandard();
+
+        ComparateurNoms comparateurDeNom2 = new ComparteurNomsParComposition(compositionneur, comparateurExact);
+
         // Créer une instance du moteur de matching
-        MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur2, comparateurExact);
+        MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateurDeNom2, generateur);
         System.out.println("-------------------Matching_App------------------");
         System.out.println("-------------------------------------------------");
         System.out.println("-La Comparaison entre les noms est en cours-");
