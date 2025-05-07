@@ -22,9 +22,9 @@ public class ComparteurNomsGeneralist implements ComparateurNoms {
             candidats1 = generateur.genererCandidats(nom1, null);
             candidats2 = generateur.genererCandidats(nom2, null);
             double maxScore = 0.0;
-            for (Nom candidat1 : candidats1) {
-                for (Nom candidat2 : candidats2) {
-                    double score = comparateur.comparer(candidat1, candidat2);
+            for (Nom cand1 : candidats1) {
+                for (Nom cand2 : candidats2) {
+                    double score = comparateur.comparer(cand1, cand2);
                     if (score > maxScore) {
                         maxScore = score;
                     }
