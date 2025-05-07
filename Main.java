@@ -17,8 +17,9 @@ public class Main {
         List<Nom> listeNoms = recuperateur.recuperer();
         List<Nom> listeNoms2 = recuperateur.recuperer();
         // GenerateurDeCandidat generateur = new GenerateurStandard();
-        GenerateurDeCandidat generateur = new GenerateurParTaille();
-        ComparateurNoms comparateur2 = new ComparteurNomsGeneralist(comparateur, generateur);
+        // GenerateurDeCandidat generateur = new GenerateurParTaille();
+        GenerateurDeCandidat generateur2 = new GenerateurStandard();
+        ComparateurNoms comparateur2 = new ComparteurNomsGeneralist(comparateur, generateur2);
         // Créer une instance du moteur de matching
         MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur2, comparateurExact);
         System.out.println("-------------------Matching_App------------------");
