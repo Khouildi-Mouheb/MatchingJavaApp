@@ -19,8 +19,8 @@ public class ComparteurNomsGeneralist implements ComparateurNoms {
         // Comparaison simple basée sur l'égalité des noms
 
         if (nom1 != null && nom2 != null) {
-            candidats1 = generateur.genererCandidats(nom1);
-            candidats2 = generateur.genererCandidats(nom2);
+            candidats1 = generateur.genererCandidats(nom1, null);
+            candidats2 = generateur.genererCandidats(nom2, null);
             double maxScore = 0.0;
             for (Nom candidat1 : candidats1) {
                 for (Nom candidat2 : candidats2) {

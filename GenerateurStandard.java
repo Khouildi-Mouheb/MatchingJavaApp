@@ -4,7 +4,7 @@ import java.util.List;
 public class GenerateurStandard implements GenerateurDeCandidat {
 
     @Override
-    public List<Nom> genererCandidats(Nom nom) {
+    public List<Nom> genererCandidats(Nom nom, List<Nom> nomsExistants) {
         List<Nom> result = new ArrayList<>();
         String[] words = nom.getNom().split(" ");
         permute(words, 0, result);

@@ -8,8 +8,7 @@ public class Main {
         Comparateur comparateurExact = new ComparateurExact();
         ComparateurNoms comparateur = new ComparateurNomsSimple(comparateurExact);
         Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.5); // Exemple d'utilisation d'un seuil
-        GenerateurDeCandidat generateur = new GenerateurStandard();
-        ComparateurNoms comparateur2 = new ComparteurNomsGeneralist(comparateur, generateur);
+
         // içi j'ajoute un exemple de recuperateur qui fonctionne avec une liste static
 
         // qui j'ai genèré
@@ -17,6 +16,9 @@ public class Main {
         // on doit ajouter une autre atribus pour le moteur qui est la liste vièrge
         List<Nom> listeNoms = recuperateur.recuperer();
         List<Nom> listeNoms2 = recuperateur.recuperer();
+        // GenerateurDeCandidat generateur = new GenerateurStandard();
+        GenerateurDeCandidat generateur = new GenerateurParTaille();
+        ComparateurNoms comparateur2 = new ComparteurNomsGeneralist(comparateur, generateur);
         // Créer une instance du moteur de matching
         MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur2, comparateurExact);
         System.out.println("-------------------Matching_App------------------");
