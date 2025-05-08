@@ -5,8 +5,8 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
     public static int marge = 0;
 
     @Override
-    public List<Nom> genererCondidat(Nom nomref, List<Nom> listeNoms) {
-        int tailleRef = nomref.getNom().length();
+    public List<Nom> genererCondidat(List<Nom> nomref, List<Nom> listeNoms) {
+        int tailleRef = nomref.get(0).getNom().length();
         List<Nom> candidats = new ArrayList<>();
 
         for (Nom nom : listeNoms) {
