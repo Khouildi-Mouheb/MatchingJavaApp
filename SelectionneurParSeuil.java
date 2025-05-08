@@ -1,5 +1,5 @@
 
-import java.util.Map;
+import java.util.List;
 
 public abstract class SelectionneurParSeuil implements Selectionneur {
     protected double seuil;
@@ -10,5 +10,5 @@ public abstract class SelectionneurParSeuil implements Selectionneur {
 
     // Abstract method, must be implemented by subclasses
     @Override
-    public abstract Map<Nom, Double> selectionner(Map<Nom, Double> resultat);
+    public abstract List<CoupleDenomAvecScore> selectionner(List<CoupleDenomAvecScore> resultat);
 }

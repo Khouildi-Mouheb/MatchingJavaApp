@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -43,7 +42,7 @@ public class Main {
         System.out.println("-La recherche entre les noms est en cours-");
 
         // Appeler la méthode de test pour effectuer le matching
-        Map<Nom, Double> resultat = moteur.rechercher(listeNoms);
+        List<CoupleDenomAvecScore> resultat = moteur.rechercher(listeNoms);
         System.out.println("-------------------------------------------------");
         System.out.println("-------------------------------------------------");
         System.out.println("-Affichage de la resultat du recherche apres la selection: -");
@@ -52,10 +51,8 @@ public class Main {
         resultat = selectionneur.selectionner(resultat);
 
         // affichage:
-        for (Map.Entry<Nom, Double> entry : resultat.entrySet()) {
-            Nom nom = entry.getKey();
-            double score = entry.getValue();
-            System.out.println("Nom : " + nom.getNom() + ", Score : " + score);
+        for (CoupleDenomAvecScore couple : resultat) {
+            System.out.println("Nom: " + couple.getCouple().getNom() + ", Score: " + couple.getScore());
         }
     }
 }

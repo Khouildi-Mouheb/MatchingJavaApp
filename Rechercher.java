@@ -1,7 +1,5 @@
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 // Classe Recherche
 public class Rechercher {
@@ -15,15 +13,17 @@ public class Rechercher {
     }
 
     // Méthode de recherche dans la liste des noms
-    public Map<Nom, Double> rechercher(Nom nomCible, List<Nom> listeNoms) {
+    public List<CoupleDenomAvecScore> rechercher(List<Nom> nomCible, List<Nom> listeNoms) {
         // Nettoyer le nom cible avant la comparaison
-        Nom nomNettoye = pretraiteur.nettoyer(nomCible);
-        Map<Nom, Double> m = new HashMap<>();
+        listeNoms = pretraiteur.nettoyer(listeNoms);
+        nomCible = pretraiteur.nettoyer(nomCible);
+        Nom nomNettoye = nomCible.get(0); // On suppose qu'il n'y a qu'un seul nom cible
+        List<CoupleDenomAvecScore> m = new java.util.ArrayList<>();
         // Parcourir la liste des noms pour trouver le meilleur match
         for (Nom nom : listeNoms) {
-            Nom nomNettoyeListe = pretraiteur.nettoyer(nom);
-            double score = comparateur.comparer(nomNettoye, nomNettoyeListe);
-            m.put(nom, score);
+
+            double score = comparateur.comparer(nomNettoye, nom);
+            m.add(new CoupleDenomAvecScore(new CoupleDeNom(nomNettoye, nom), score));
 
             // Si la similarité est parfaite (score = 1.0), retourner le nom
             /*

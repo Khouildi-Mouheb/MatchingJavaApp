@@ -5,13 +5,13 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
     public static int marge = 0;
 
     @Override
-    public List<Nom> genererCondidat(List<Nom> nomref, List<Nom> listeNoms) {
+    public List<CoupleDeNom> genererCondidat(List<Nom> nomref, List<Nom> listeNoms) {
         int tailleRef = nomref.get(0).getNom().length();
-        List<Nom> candidats = new ArrayList<>();
+        List<CoupleDeNom> candidats = new ArrayList<>();
 
         for (Nom nom : listeNoms) {
             if (nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge) {
-                candidats.add(nom);
+                candidats.add(new CoupleDeNom(nomref.get(0), nom));
             }
         }
 

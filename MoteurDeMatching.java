@@ -1,6 +1,5 @@
 
 import java.util.List;
-import java.util.Map;
 
 public class MoteurDeMatching {
     // Composition : comparateur est créé directement ici
@@ -23,7 +22,7 @@ public class MoteurDeMatching {
     }
 
     // Méthode pour effectuer le matching
-    public Map<Nom, Double> rechercher(List<Nom> listNoms) {
+    public List<CoupleDenomAvecScore> rechercher(List<Nom> listNoms) {
 
         // Créer une instance de Recherche avec prétraiteur et comparateur
         Rechercher recherche = new Rechercher(pretraiteur, comparateurDeNom);
@@ -49,47 +48,46 @@ public class MoteurDeMatching {
         Nom nomCible = new Nom("yacine boujelbane");
 
         // Effectuer la recherche
-        Map<Nom, Double> resultat = recherche.rechercher(nomCible, listeNom);
-        for (Map.Entry<Nom, Double> entry : resultat.entrySet()) {
-            Nom nom = entry.getKey();
-            double score = entry.getValue();
-            System.out.println("Nom : " + nom.getNom() + ", Score : " + score);
+        List<Nom> nomCibleL = new java.util.ArrayList<>();
+        nomCibleL.add(nomCible);
 
-        }
+        List<CoupleDenomAvecScore> resultat = recherche.rechercher(nomCibleL, listeNom);
+
         return resultat;
 
     }
 
     // Méthode pour tester le Comparateur
-    public void comparer(List<Nom> listNoms2, List<Nom> listNoms) {
+    public List<CoupleDenomAvecScore> comparer(List<Nom> listNoms2, List<Nom> listNoms) {
         listNoms2 = pretraiteur.nettoyer(listNoms2);
         listNoms = pretraiteur.nettoyer(listNoms);
-        List<Nom> temp = new java.util.ArrayList<>();
+        List<CoupleDeNom> temp = new java.util.ArrayList<>();
+        List<CoupleDenomAvecScore> temp2 = new java.util.ArrayList<>();
         // Map<Nom, Double> resultat;
         double somme = 0.0;
         double score = 0.0;
         for (Nom nom : listNoms2) {
 
             if (generateur != null) {
-                temp = generateur.genererCondidat(nom, listNoms);
-            } else {
-                temp = listNoms;
+                List<Nom> nomAgenerer = new java.util.ArrayList<>();
+                nomAgenerer.add(nom);
+                temp = generateur.genererCondidat(nomAgenerer, listNoms);
             }
             score = 0.0;
-            for (Nom nom2 : temp) {
-                if (comparateurDeNom.comparer(nom, nom2) > score) {
-                    score = comparateurDeNom.comparer(nom, nom2);
+            for (CoupleDeNom couple : temp) {
+                if (comparateurDeNom.comparer(couple.getNom(), couple.getNom2()) > score) {
+                    score = comparateurDeNom.comparer(couple.getNom(), couple.getNom2());
+                    temp2.add(new CoupleDenomAvecScore(new CoupleDeNom(couple.getNom(), couple.getNom2()), score));
+
                 }
-                score = comparateurDeNom.comparer(nom, nom2);
-                System.out.println("Comparaison entre " + nom.getNom() + " et " + nom2.getNom() + ": "
-                        + comparateurDeNom.comparer(nom, nom2));
+
                 // resultat.put(nom, score);
 
             }
             somme += score;
 
         }
-        System.out.println("La somme des scores est : " + somme / listNoms2.size());
+        return temp2;
         // prochainnement on doit intégre le selectionneur
     }
 }

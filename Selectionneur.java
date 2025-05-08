@@ -1,7 +1,7 @@
 
-import java.util.Map;
+import java.util.List;
 
 public interface Selectionneur {
     // make the returnType of the select couple nom score
-    public Map<Nom, Double> selectionner(Map<Nom, Double> resultat);
+    public List<CoupleDenomAvecScore> selectionner(List<CoupleDenomAvecScore> resultat);
 }

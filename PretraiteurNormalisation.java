@@ -9,6 +9,7 @@ public class PretraiteurNormalisation implements Pretraiteur {
         for (Nom n : nom) {
             String valeur = n.getNom(); // pas "String nom"
             String nettoye = valeur.trim().toLowerCase().replaceAll("\\s+", "");
+            n.setNom(nettoye); // pas "nom.setNom(nettoye)"
             nomPretraited.add(n);
 
         }
