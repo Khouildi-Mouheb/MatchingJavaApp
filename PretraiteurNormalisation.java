@@ -1,8 +1,17 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class PretraiteurNormalisation implements Pretraiteur {
+    List<Nom> nomPretraited = new ArrayList<>();
+
     @Override
-    public Nom nettoyer(Nom nom) {
-        String valeur = nom.getNom(); // pas "String nom"
-        String nettoye = valeur.trim().toLowerCase().replaceAll("\\s+", "");
-        return new Nom(nettoye);
+    public List<Nom> nettoyer(List<Nom> nom) {
+        for (Nom n : nom) {
+            String valeur = n.getNom(); // pas "String nom"
+            String nettoye = valeur.trim().toLowerCase().replaceAll("\\s+", "");
+            nomPretraited.add(n);
+
+        }
+        return nomPretraited;
     }
 }

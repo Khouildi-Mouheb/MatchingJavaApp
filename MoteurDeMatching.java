@@ -31,23 +31,19 @@ public class MoteurDeMatching {
         // Créer des objets Nom avec des chaînes "brutes"
 
         // Nettoyer les noms en utilisant le prétraiteur
-        Nom nom1 = listNoms.getFirst();
-        listeNom.add(nom1);
-        listNoms.removeFirst();
 
-        Nom nom2 = listNoms.getFirst();
-        listeNom.add(nom2);
-        listNoms.removeFirst();
-        Nom nom3 = listNoms.getFirst();
-        listeNom.add(nom3);
-
-        nom1 = pretraiteur.nettoyer(nom1);
-        nom2 = pretraiteur.nettoyer(nom2);
-        nom3 = pretraiteur.nettoyer(nom3);
-
-        System.out.println("nomBrut1 apres nettoyage :" + nom1);
-        System.out.println("nomBrut2 apres nettoyage :" + nom2);
-        System.out.println("nomBrut3 apres nettoyage :" + nom3);
+        listeNom = pretraiteur.nettoyer(listNoms);
+        /*
+         * Nom nom1 = listNoms.getFirst();
+         * listeNom.add(nom1);
+         * listNoms.removeFirst();
+         * 
+         * Nom nom2 = listNoms.getFirst();
+         * listeNom.add(nom2);
+         * listNoms.removeFirst();
+         * Nom nom3 = listNoms.getFirst();
+         * listeNom.add(nom3);
+         */
 
         // Nom cible à rechercher
         Nom nomCible = new Nom("yacine boujelbane");
@@ -66,6 +62,8 @@ public class MoteurDeMatching {
 
     // Méthode pour tester le Comparateur
     public void comparer(List<Nom> listNoms2, List<Nom> listNoms) {
+        listNoms2 = pretraiteur.nettoyer(listNoms2);
+        listNoms = pretraiteur.nettoyer(listNoms);
         List<Nom> temp = new java.util.ArrayList<>();
         // Map<Nom, Double> resultat;
         double somme = 0.0;
@@ -79,8 +77,6 @@ public class MoteurDeMatching {
             }
             score = 0.0;
             for (Nom nom2 : temp) {
-                nom2 = pretraiteur.nettoyer(nom2);
-                nom = pretraiteur.nettoyer(nom);
                 if (comparateurDeNom.comparer(nom, nom2) > score) {
                     score = comparateurDeNom.comparer(nom, nom2);
                 }
@@ -94,5 +90,6 @@ public class MoteurDeMatching {
 
         }
         System.out.println("La somme des scores est : " + somme / listNoms2.size());
+        // prochainnement on doit intégre le selectionneur
     }
 }
