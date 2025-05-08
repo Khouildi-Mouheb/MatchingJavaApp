@@ -49,6 +49,13 @@ public class Main {
         System.out.println("-Affichage de la resultat du recherche apres la selection: -");
 
         // Afficher les résultats du matching avec le Selectionneur
-        selectionneur.selectionner(resultat);
+        resultat = selectionneur.selectionner(resultat);
+
+        // affichage:
+        for (Map.Entry<Nom, Double> entry : resultat.entrySet()) {
+            Nom nom = entry.getKey();
+            double score = entry.getValue();
+            System.out.println("Nom : " + nom.getNom() + ", Score : " + score);
+        }
     }
 }

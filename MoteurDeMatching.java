@@ -64,7 +64,7 @@ public class MoteurDeMatching {
 
     }
 
-    // Méthode pour tester le ComparateurExact
+    // Méthode pour tester le Comparateur
     public void comparer(List<Nom> listNoms2, List<Nom> listNoms) {
         List<Nom> temp = new java.util.ArrayList<>();
         // Map<Nom, Double> resultat;
@@ -79,6 +79,8 @@ public class MoteurDeMatching {
             }
             score = 0.0;
             for (Nom nom2 : temp) {
+                nom2 = pretraiteur.nettoyer(nom2);
+                nom = pretraiteur.nettoyer(nom);
                 if (comparateurDeNom.comparer(nom, nom2) > score) {
                     score = comparateurDeNom.comparer(nom, nom2);
                 }

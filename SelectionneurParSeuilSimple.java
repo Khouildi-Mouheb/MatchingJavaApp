@@ -1,6 +1,7 @@
 
 // Import List for handling the list of 'Nom'
 import java.util.Map;
+import java.util.HashMap;
 
 public class SelectionneurParSeuilSimple extends SelectionneurParSeuil {
 
@@ -9,23 +10,25 @@ public class SelectionneurParSeuilSimple extends SelectionneurParSeuil {
     }
 
     @Override
-    public void selectionner(Map<Nom, Double> resultat) {
+    public Map<Nom, Double> selectionner(Map<Nom, Double> resultat) {
         // Implémentation simple : on sélectionne le premier nom si le seuil est
         // respecté
+        Map<Nom, Double> resultatSelectionne = new HashMap<>();
+
         if (resultat != null && !resultat.isEmpty()) {
             for (Map.Entry<Nom, Double> entry : resultat.entrySet()) {
                 Nom nom = entry.getKey();
                 double score = entry.getValue();
                 if (score > seuil) {
                     // Sélectionne le premier nom (exemple simple)
-                    System.out.println("Nom sélectionné : " + nom.getNom());
+                    resultatSelectionne.put(nom, score);
                 }
 
             }
 
         }
+        return resultatSelectionne;
 
-        // Sélectionne le premier nom (exemple simple)
     }
 
 }

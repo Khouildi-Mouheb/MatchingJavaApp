@@ -10,5 +10,5 @@ public abstract class SelectionneurParSeuil implements Selectionneur {
 
     // Abstract method, must be implemented by subclasses
     @Override
-    public abstract void selectionner(Map<Nom, Double> resultat);
+    public abstract Map<Nom, Double> selectionner(Map<Nom, Double> resultat);
 }
