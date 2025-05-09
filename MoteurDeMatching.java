@@ -45,7 +45,7 @@ public class MoteurDeMatching {
          */
 
         // Nom cible à rechercher
-        Nom nomCible = new Nom("yacine boujelbane");
+        Nom nomCible = new Nom("Nk-1", "yacine boujelbane");
 
         // Effectuer la recherche
         List<Nom> nomCibleL = new java.util.ArrayList<>();

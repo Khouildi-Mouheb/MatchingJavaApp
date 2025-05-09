@@ -9,9 +9,15 @@ public class Main {
 
         // içi j'ajoute un exemple de recuperateur qui fonctionne avec une liste static
         Recuperateur recuperateur = new RecuperateurStatique();
+        Recuperateur recuperateur2 = new RecuperateurCSV(
+                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_1k.csv");
 
-        List<Nom> listeNoms = recuperateur.recuperer();
-        List<Nom> listeNoms2 = recuperateur.recuperer();
+        List<Nom> listeNoms = recuperateur.importData();
+        List<Nom> listeNoms2 = recuperateur.importData();
+        List<Nom> listeNoms3 = recuperateur2.importData();
+        for (Nom nom : listeNoms3) {
+            System.out.println("Nom: " + nom.getNom() + ", Prénom: " + nom.getId());
+        }
 
         // Créer une instance de GenerateurDeCondidat
         GenerateurDeCondidat generateur = new GenerateurParTaille();

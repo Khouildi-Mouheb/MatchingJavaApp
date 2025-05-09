@@ -2,5 +2,5 @@ import java.util.List;
 
 public interface Recuperateur {
 
-    List<Nom> recuperer();
+    public List<Nom> importData();
 }

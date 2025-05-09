@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecuperateurStatique implements Recuperateur {
-    Nom nomBrut1 = new Nom(" khouildi mouheb");
-    Nom nomBrut2 = new Nom("mouhebkhouildi");
-    Nom nomBrut3 = new Nom("yacine boujelbane");
+    Nom nomBrut1 = new Nom("Nk--sdsdfjj", " khouildi mouheb");
+    Nom nomBrut2 = new Nom("Nk-sdfjfgjjs", "mouhebkhouildi");
+    Nom nomBrut3 = new Nom("Nksjfsjfzikf", "yacine boujelbane");
 
     @Override
-    public List<Nom> recuperer() {
+    public List<Nom> importData() {
         // Créer une liste de noms
         List<Nom> listeNoms = new ArrayList<>();
         listeNoms.add(nomBrut1);
