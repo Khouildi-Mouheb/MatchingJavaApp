@@ -10,7 +10,8 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
         List<CoupleDeNom> candidats = new ArrayList<>();
 
         for (Nom nom : listeNoms) {
-            if (nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge) {
+
+            if ((nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge)) {
                 candidats.add(new CoupleDeNom(nomref.get(0), nom));
             }
         }

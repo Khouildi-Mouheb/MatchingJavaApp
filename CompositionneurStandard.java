@@ -15,7 +15,7 @@ public class CompositionneurStandard implements CompositionneurDeNom {
     // deux méthodes statiques importées pour générer les permutations
 
     private static void permute(String[] words, int start, List<Nom> result) {
-        Nom nom = new Nom("");
+        Nom nom = new Nom("", "");
         if (start == words.length) {
             nom.setNom(String.join(" ", words));
             result.add(nom);

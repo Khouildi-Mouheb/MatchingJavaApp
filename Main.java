@@ -5,7 +5,7 @@ public class Main {
         // Créer les dépendances pour le prétraiteur et le sélectionneur
         Pretraiteur pretraiteur = new PretraiteurNormalisation();
 
-        Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.5);
+        Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.0);
 
         // içi j'ajoute un exemple de recuperateur qui fonctionne avec une liste static
         Recuperateur recuperateur = new RecuperateurStatique();
@@ -16,7 +16,7 @@ public class Main {
         List<Nom> listeNoms2 = recuperateur.importData();
         List<Nom> listeNoms3 = recuperateur2.importData();
         for (Nom nom : listeNoms3) {
-            System.out.println("Nom: " + nom.getNom() + ", Prénom: " + nom.getId());
+            System.out.println("Nom: " + nom.getNom() + ", id: " + nom.getId());
         }
 
         // Créer une instance de GenerateurDeCondidat
@@ -35,30 +35,36 @@ public class Main {
 
         // Créer une instance du moteur de matching
         // on doit ajouter une autre atribus pour le moteur qui est la liste vièrge
-        MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateurDeNom2, generateur);
+        MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur, generateur);
 
         System.out.println("-------------------Matching_App------------------");
         System.out.println("-------------------------------------------------");
         System.out.println("-La Comparaison entre les noms est en cours-");
         // Appeler la méthode de test pour ComparateurExact
-        moteur.comparer(listeNoms2, listeNoms);
+        List<CoupleDenomAvecScore> listeNoms4 = moteur.comparer(listeNoms3, listeNoms3);
 
         System.out.println("-------------------------------------------------");
         System.out.println("-------------------------------------------------");
         System.out.println("-La recherche entre les noms est en cours-");
 
         // Appeler la méthode de test pour effectuer le matching
-        List<CoupleDenomAvecScore> resultat = moteur.rechercher(listeNoms);
+        // List<CoupleDenomAvecScore> resultat = moteur.rechercher(listeNoms3);
         System.out.println("-------------------------------------------------");
         System.out.println("-------------------------------------------------");
         System.out.println("-Affichage de la resultat du recherche apres la selection: -");
 
         // Afficher les résultats du matching avec le Selectionneur
-        resultat = selectionneur.selectionner(resultat);
+        // resultat = selectionneur.selectionner(resultat);
+        listeNoms4 = selectionneur.selectionner(listeNoms4);
+        for (CoupleDenomAvecScore couple : listeNoms4) {
+            System.out.println("Nom1: " + couple.getCouple().getNom() + " Nom2: " + couple.getCouple().getNom2()
+                    + ", Score: " + couple.getScore());
+        }
 
         // affichage:
-        for (CoupleDenomAvecScore couple : resultat) {
-            System.out.println("Nom: " + couple.getCouple().getNom() + ", Score: " + couple.getScore());
-        }
+        // for (CoupleDenomAvecScore couple : resultat) {
+        // System.out.println("Nom: " + couple.getCouple().getNom() + ", Score: " +
+        // couple.getScore());
+        // }
     }
 }
