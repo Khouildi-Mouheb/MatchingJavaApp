@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PretraiteurNormalisation implements Pretraiteur {
-    List<Nom> nomPretraited = new ArrayList<>();
+    List<Nom> nomPretraiter = new ArrayList<>();
 
     @Override
     public List<Nom> nettoyer(List<Nom> nom) {
@@ -10,9 +10,10 @@ public class PretraiteurNormalisation implements Pretraiteur {
             String valeur = n.getNom(); // pas "String nom"
             String nettoye = valeur.trim().toLowerCase().replaceAll("\\s+", "");
             n.setNom(nettoye); // pas "nom.setNom(nettoye)"
-            nomPretraited.add(n);
+            nomPretraiter.add(n);
 
         }
-        return nomPretraited;
+        return nomPretraiter;
     }
+
 }

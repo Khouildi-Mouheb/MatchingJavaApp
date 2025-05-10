@@ -9,6 +9,8 @@ public class SelectionneurParSeuilSimple extends SelectionneurParSeuil {
         super(seuil);
     }
 
+    
+
     @Override
     public List<CoupleDenomAvecScore> selectionner(List<CoupleDenomAvecScore> resultat) {
         // Implémentation simple : on sélectionne le premier nom si le seuil est
