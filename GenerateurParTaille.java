@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GenerateurParTaille implements GenerateurDeCondidat {
-    public static int marge = 0;
+    private static int marge = 0;
 
     @Override
     public List<CoupleDeNom> genererCondidat(List<Nom> nomref, List<Nom> listeNoms) {
