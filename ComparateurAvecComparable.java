@@ -1,5 +1,5 @@
 public class ComparateurAvecComparable implements Comparable<Nom>, Comparateur {
-
+// Classe qui implémente Comparable pour comparer les noms
     @Override
     public int compareTo(Nom nomAComparer) {
         if (nomAComparer != null) {
