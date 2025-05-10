@@ -6,6 +6,9 @@ public class Nom {
         this.nom = nom;
         this.id = id;
     }
+    public Nom(String nom) {
+        this.nom = nom;
+    }
 
     public String getId() {
         return id;
