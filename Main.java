@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -10,11 +11,13 @@ public class Main {
         // içi j'ajoute un exemple de recuperateur qui fonctionne avec une liste static
         Recuperateur recuperateur = new RecuperateurStatique();
         Recuperateur recuperateur2 = new RecuperateurCSV(
-                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_658k.csv");
+                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_64k.csv");
 
         List<Nom> listeNoms = recuperateur.importData();
         List<Nom> listeNoms2 = recuperateur.importData();
         List<Nom> listeNoms3 = recuperateur2.importData();
+        List<Nom> listeNoms6 = new ArrayList<>();
+        List<CoupleDenomAvecScore> listeNoms7 = new ArrayList<>();
 
         /*
          * for (Nom nom : listeNoms3) {
@@ -22,14 +25,24 @@ public class Main {
          * }
          */
 
+        List<Nom> listeNoms8 = listeNoms3.subList(0, (int) (listeNoms3.size() / 2));
+        listeNoms3 = listeNoms3.subList((int) (listeNoms3.size() / 2), listeNoms3.size());
         if ((listeNoms3.size() > 2000)) {
             int j = 0;
+            int k = 0;
+            int d = listeNoms3.size();
 
-            while (j + 1000 < listeNoms3.size() - 1001) {
-                List<Nom> listeNoms5 = listeNoms3.subList(j, j + 1000);
+            while (1000 < listeNoms3.size()) {
+                k++;
+                List<Nom> listeNoms5 = listeNoms3.subList(0, 1000);
+                listeNoms6.addAll(listeNoms3);
+                listeNoms3.removeAll(listeNoms3.subList(0, 1000));
                 j = j + 1000;
-                if (j + 1000 > listeNoms3.size() - 1001) {
-                    listeNoms5 = listeNoms3.subList(j, listeNoms3.size() - 1);
+                if (1000 > listeNoms3.size() - 1) {
+                    listeNoms5 = listeNoms3.subList(1000, listeNoms3.size() - 1);
+                    listeNoms3 = listeNoms8;
+                    listeNoms6.addAll(listeNoms3);
+                    listeNoms3.removeAll(listeNoms3.subList(0, 1000));
                 }
                 // Créer une instance de GenerateurDeCondidat
                 GenerateurDeCondidat generateur = new GenerateurParTaille();
@@ -45,7 +58,7 @@ public class Main {
                 // on doit ajouter une autre atribus pour le moteur qui est la liste vièrge
                 MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur, generateur);
 
-                System.out.println("-------------------Matching_App------------------");
+                System.out.println("-------------------Matching_App " + k + " ------------------");
                 System.out.println("-------------------------------------------------");
                 System.out.println("-La Comparaison entre les noms est en cours-");
                 // Appeler la méthode de test pour ComparateurExact
@@ -70,6 +83,7 @@ public class Main {
                 }
 
             }
+
         }
         // Créer une instance de GenerateurDeCondidat
         GenerateurDeCondidat generateur = new GenerateurParTaille();
