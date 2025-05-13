@@ -39,9 +39,6 @@ public class MoteurDeMatchingMouheb {
         // generation des condidats
         System.out.println("--------------------les condidats-------------------");
         List<CoupleDeNom> condidats = generateur.genererCondidat(ln.get(0), listDesNomsAvecId);
-        for (CoupleDeNom cp : condidats) {
-            System.out.println(cp.getNom1() + "-" + cp.getNom2());
-        }
 
         // comparaison
         List<CoupleDenomAvecScore> resultatDeComparaison = new ArrayList<>();

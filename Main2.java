@@ -30,6 +30,8 @@ public class Main2 {
         for (CoupleDenomAvecScore nom : listeNoms3) {
             System.out.println(nom.getCouple().getNom1() + " " + nom.getCouple().getNom2() + " " + nom.getScore());
         }
+        long endTime = System.nanoTime();
+        System.out.println("Temps d'exécution : " + (endTime - startTime) / 1_000_000 + " ms");
 
     }
 }
