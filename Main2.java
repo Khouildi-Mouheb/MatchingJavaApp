@@ -15,7 +15,7 @@ public class Main2 {
         ComparateurNoms comparateur = new ComparateurNomsSimple(comparateurExact);
         ComparateurNoms comparateurComposition = new ComparteurNomsParComposition(compositionneur, comparateurExact);
 
-         MoteurDeMatchingMouheb moteur = new MoteurDeMatchingMouheb(pretraiteur, generateur, comparateur);
+        MoteurDeMatchingMouheb moteur = new MoteurDeMatchingMouheb(pretraiteur, generateur, comparateurExact);
 
         Recuperateur recuperateur = new RecuperateurCSV(
                 "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_100.csv");

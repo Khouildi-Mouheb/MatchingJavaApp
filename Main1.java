@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Main1 {
     public static void main(String[] args) {
+
         long startTime = System.nanoTime();
         // Créer les dépendances pour le prétraiteur et le sélectionneur
         Pretraiteur pretraiteur = new PretraiteurNormalisation();
@@ -18,9 +19,9 @@ public class Main1 {
         MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur, generateur);
 
         Recuperateur recuperateur = new RecuperateurCSV(
-                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_400.csv");
+                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_64k.csv");
         Recuperateur recuperateur2 = new RecuperateurCSV(
-                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_100.csv");
+                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_4k.csv");
 
         List<Nom> listeNoms1 = recuperateur.importData();
         List<Nom> listeNoms2 = recuperateur2.importData();
@@ -33,6 +34,9 @@ public class Main1 {
             System.out.println(couple.getCouple().getNom1() + " " + couple.getCouple().getNom2() + " "
                     + couple.getScore());
         }
-
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
+        System.out.println("Execution time in milliseconds: " + duration / 1000000);
     }
+
 }

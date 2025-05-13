@@ -11,13 +11,16 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
     public List<CoupleDeNom> genererCondidat(List<Nom> nomref, List<Nom> listeNoms) {
         int tailleRef = nomref.get(0).getNom().length();
         List<CoupleDeNom> candidats = new ArrayList<>();
-        Map<Double, List<CoupleDeNom>> map = new HashMap<>();
 
         for (Nom nom : listeNoms) {
 
+            String[] nom1 = nom.getNom().split(" ");
+            for (String n : nom1) {
+
+            }
+
             if ((nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge)) {
                 candidats.add(new CoupleDeNom(nomref.get(0), nom));
-                map.put((double) nom.getNom().length(), List.of(new CoupleDeNom(nomref.get(0), nom)));
 
             }
         }
@@ -29,23 +32,22 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
         GenerateurParTaille.marge = mrg;
     }
 
+    public List<CoupleDeNom> genererCondidat(Nom nomref, List<Nom> listeNoms) {
+        int tailleRef = nomref.getNom().length();
+        List<CoupleDeNom> candidats = new ArrayList<>();
+        Map<Double, List<CoupleDeNom>> map = new HashMap<>();
 
-public List<CoupleDeNom> genererCondidat(Nom nomref, List<Nom> listeNoms) {
-    int tailleRef = nomref.getNom().length();
-    List<CoupleDeNom> candidats = new ArrayList<>();
-    Map<Double, List<CoupleDeNom>> map = new HashMap<>();
+        for (Nom nom : listeNoms) {
+            if ((nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge)) {
+                CoupleDeNom couple = new CoupleDeNom(nomref, nom);
+                candidats.add(couple);
 
-    for (Nom nom : listeNoms) {
-        if ((nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge)) {
-            CoupleDeNom couple = new CoupleDeNom(nomref, nom);
-            candidats.add(couple);
-
-            // Stockage dans la Map pour organisation par taille
-            map.computeIfAbsent((double) nom.getNom().length(), k -> new ArrayList<>()).add(couple);
+                // Stockage dans la Map pour organisation par taille
+                map.computeIfAbsent((double) nom.getNom().length(), k -> new ArrayList<>()).add(couple);
+            }
         }
-    }
 
-    return candidats;
-}
+        return candidats;
+    }
 
 }

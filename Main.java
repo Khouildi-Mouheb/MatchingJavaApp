@@ -134,11 +134,6 @@ public class Main {
         long endTime = System.nanoTime();
         System.out.println("Temps d'exécution : " + (endTime - startTime) / 1_000_000 + " ms");
 
-        // affichage:
-        // for (CoupleDenomAvecScore couple : resultat) {
-        // System.out.println("Nom: " + couple.getCouple().getNom() + ", Score: " +
-        // couple.getScore());
-        // }
     }
 
 }
