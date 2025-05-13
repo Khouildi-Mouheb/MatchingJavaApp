@@ -2,67 +2,66 @@
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class MoteurDeMatchingMouheb {
-    private Recuperateur recuperateur;
-    private Pretraiteur pretraiteur;
-    private GenerateurDeCondidat generateur;
-    private Comparateur comparateur;
+    private PretraiteurNormalisation pretraiteur ;
+    private GenerateurParTaille generateur;
+    private ComparateurExact comparateur;
+    //private SelectionneurParSeuil selectionneur;
 
-    public MoteurDeMatchingMouheb(Recuperateur recuperateur, Pretraiteur pretraiteur, GenerateurDeCondidat generateur,
-            Comparateur comparateur) {
-        this.recuperateur = recuperateur;
-        this.pretraiteur = pretraiteur;
-        this.generateur = generateur;
-        this.comparateur = comparateur;
+
+    //Constructeur
+    public MoteurDeMatchingMouheb(
+    PretraiteurNormalisation pretraiteur,
+    GenerateurParTaille generateur,
+    ComparateurExact comparateur
+    ){
+        this.pretraiteur=pretraiteur;
+        this.generateur=generateur;
+        this.comparateur=comparateur;
+        //this.selectionneur=selectionneur;
     }
 
-    public void executerMatching() {
+    //le methode de recherche
 
-        List<Nom> tousLeNomsId = recuperateur.importData();
-
-        List<Nom> tousLeNoms = new ArrayList<>();
-        for (Nom nomOriginal : tousLeNomsId) {
-            Nom nouveauNom = new Nom(nomOriginal.getNom());
-            tousLeNoms.add(nouveauNom);
+    public List<CoupleDenomAvecScore> rechercherUnNomDansUneListe (Nom nomARechercher , List<Nom> leNoms){
+        //praitreittement
+        Nom nom=pretraiteur.nettoyer(nomARechercher);
+        List <Nom> listDesNomsAvecId = pretraiteur.nettoyer(leNoms);
+        //affichage des noms apres pretraittement
+        System.out.println("--------------------nom a rechercher nettoyer-------------------");
+        System.out.println(nom.getNom());
+        System.out.println("--------------------liste nettoyer-------------------");
+        for (Nom n : listDesNomsAvecId){
+            System.out.println(n.getNom());
+        }
+        //generation des condidats
+        System.out.println("--------------------les condidats-------------------");
+        
+        List <CoupleDeNom> condidats = generateur.genererCondidat(nom, listDesNomsAvecId);
+        for (CoupleDeNom cp : condidats){
+            System.out.println(cp.getNom1()+"-"+cp.getNom2());
+        }
+        //comparaison
+        List <CoupleDenomAvecScore> resultatDeComparaison = new ArrayList<>();
+        for(CoupleDeNom cond : condidats){
+            resultatDeComparaison.add(comparateur.comparer(cond));
+        }
+        System.out.println("--------------------resultat de comparaison-------------------");
+        for (CoupleDenomAvecScore cps : resultatDeComparaison){
+            System.out.println(cps.getCouple().getNom1()+"-"+cps.getCouple().getNom2()+"-"+cps.getScore());
         }
 
-        List<Nom> nomsPretraite = pretraiteur.nettoyer(tousLeNoms);
-        System.out.println("--------------------------------------------------------");
-        System.out.println("List of Names (Preprocessed):");
-        for (Nom nom : nomsPretraite) {
-            System.out.println(nom.getNom()); // ✅ Extract and print only the name
-        }
-
-        List<Nom> nomsRef = new ArrayList<>();
-        nomsRef.add(new Nom("tankokyam"));
-
-        List<CoupleDeNom> candidats = generateur.genererCondidat(nomsRef, nomsPretraite);
-        System.out.println("--------------------------------------------------------");
-        System.out.println("List of Candidates:");
-        for (CoupleDeNom couple : candidats) {
-            System.out.println(couple.getNom1().getNom() + " - " + couple.getNom2().getNom());
-        }
-
-        System.out.println("--------------------------------------------------------");
-        int resultat = rechercherExact(candidats);
-        System.out.println("Exact match found? " + (resultat == 1 ? "Yes" : "No"));
-    }
-
-    public int rechercherExact(List<CoupleDeNom> candidats) {
-        for (CoupleDeNom couple : candidats) {
-            if (comparateur.comparer(couple.getNom1().getNom(), couple.getNom2().getNom()) == 1.0) {
-                return 1;
+        //selection par le score > 0.9
+        List <CoupleDenomAvecScore> resultat = new ArrayList<>();
+        for (CoupleDenomAvecScore cpas : resultatDeComparaison){
+            if (cpas.getScore()>=0.9){
+                resultat.add(cpas);
             }
         }
-        return 0;
+
+        return resultat ;
+
     }
 
-    public void afficherNomsSansId() {
-        List<Nom> tousLeNomsId = recuperateur.importData(); // Load names with IDs
-        System.out.println("--------------------------------------------------------");
-        System.out.println("🔹 List of Names (Without IDs):");
-        for (Nom nom : tousLeNomsId) {
-            System.out.println(nom.getNom()); // ✅ Extract and print only the name
-        }
-    }
 }

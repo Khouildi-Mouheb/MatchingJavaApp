@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 import java.util.List;
 
 // Classe Recherche
@@ -37,4 +37,15 @@ public class Rechercher {
         }
         return m;
     }
+
+    public List<CoupleDenomAvecScore> rechercher(List<CoupleDeNom> condidats){
+    List<CoupleDenomAvecScore> result = new ArrayList<>();
+    for (CoupleDeNom couple : condidats) {
+        Nom nom1 = couple.getNom1();
+        Nom nom2 = couple.getNom2();
+        double score = comparateur.comparer(nom1, nom2);
+        result.add(new CoupleDenomAvecScore(couple, score));
+    }
+    return result;
+}
 }

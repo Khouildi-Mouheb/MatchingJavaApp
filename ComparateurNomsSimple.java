@@ -2,9 +2,16 @@
 public class ComparateurNomsSimple implements ComparateurNoms {
     Comparateur comparateur;
 
+<<<<<<< Updated upstream
     ComparateurNomsSimple(Comparateur comparateur) {
         this.comparateur = comparateur;
     }
+=======
+
+
+
+    
+>>>>>>> Stashed changes
 
     @Override
     public double comparer(Nom nom1, Nom nom2) {
