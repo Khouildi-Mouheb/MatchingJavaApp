@@ -2,9 +2,6 @@
 public class ComparateurNomsSimple implements ComparateurNoms {
     Comparateur comparateur;
 
-
-
-
     ComparateurNomsSimple(Comparateur comparateur) {
         this.comparateur = comparateur;
     }

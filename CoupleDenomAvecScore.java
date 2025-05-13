@@ -1,3 +1,4 @@
+
 public class CoupleDenomAvecScore {
     private CoupleDeNom couplenom;
     private double score;

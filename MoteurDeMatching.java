@@ -1,4 +1,3 @@
-
 import java.util.List;
 
 public class MoteurDeMatching {
@@ -9,6 +8,7 @@ public class MoteurDeMatching {
     // Agrégation : prétraiteur et selectionneur sont passés en argument du
     // constructeur
     private Pretraiteur pretraiteur;
+
     private List<Nom> listeNom = new java.util.ArrayList<>();
 
     // Constructeur
@@ -22,72 +22,61 @@ public class MoteurDeMatching {
     }
 
     // Méthode pour effectuer le matching
-    public List<CoupleDenomAvecScore> rechercher(List<Nom> listNoms) {
+    public List<CoupleDenomAvecScore> rechercher(Nom nomCible, List<Nom> listeNoms) {
 
-        // Créer une instance de Recherche avec prétraiteur et comparateur
-        Rechercher recherche = new Rechercher(pretraiteur, comparateurDeNom);
+        List<CoupleDenomAvecScore> m = new java.util.ArrayList<>();
+        // Parcourir la liste des noms pour trouver le meilleur match
 
-        // Créer des objets Nom avec des chaînes "brutes"
+        for (Nom nom : listeNoms) {
 
-        // Nettoyer les noms en utilisant le prétraiteur
+            double score = this.comparateurDeNom.comparer(nomCible, nom);
+            m.add(new CoupleDenomAvecScore(new CoupleDeNom(nomCible, nom), score));
 
-        listeNom = pretraiteur.nettoyer(listNoms);
-        /*
-         * Nom nom1 = listNoms.getFirst();
-         * listeNom.add(nom1);
-         * listNoms.removeFirst();
-         * 
-         * Nom nom2 = listNoms.getFirst();
-         * listeNom.add(nom2);
-         * listNoms.removeFirst();
-         * Nom nom3 = listNoms.getFirst();
-         * listeNom.add(nom3);
-         */
+        }
+        return m;
+    }
 
-        // Nom cible à rechercher
-        Nom nomCible = new Nom("Nk-1", "yacine boujelbane");
+    public List<Nom> Dedupliquer(List<Nom> listNoms, Selectionneur selectionneur) {
+        for (Nom nom : listNoms) {
+            List<CoupleDenomAvecScore> listedesnomtrouves = this.rechercher(nom, listNoms);
+            listedesnomtrouves = selectionneur.selectionner(listedesnomtrouves);
+            if (listedesnomtrouves.size() > 0) {
+                for (CoupleDenomAvecScore couple : listedesnomtrouves) {
+                    listNoms.remove(couple.getCouple().getNom1());
+                }
+            }
 
-        // Effectuer la recherche
-        List<Nom> nomCibleL = new java.util.ArrayList<>();
-        nomCibleL.add(nomCible);
-
-        List<CoupleDenomAvecScore> resultat = recherche.rechercher(nomCibleL, listeNom);
-
-        return resultat;
-
+        }
+        return listeNom;
     }
 
     // Méthode pour tester le Comparateur
     public List<CoupleDenomAvecScore> comparer(List<Nom> listNoms2, List<Nom> listNoms) {
-        listNoms2 = pretraiteur.nettoyer(listNoms2);
-        listNoms = pretraiteur.nettoyer(listNoms);
+        listNoms2 = this.pretraiteur.nettoyer(listNoms2);
+        listNoms = this.pretraiteur.nettoyer(listNoms);
         List<CoupleDeNom> temp = new java.util.ArrayList<>();
         List<CoupleDenomAvecScore> temp2 = new java.util.ArrayList<>();
         // Map<Nom, Double> resultat;
-        double somme = 0.0;
+        // double somme = 0.0;
         double score = 0.0;
         for (Nom nom : listNoms2) {
 
             if (generateur != null) {
                 List<Nom> nomAgenerer = new java.util.ArrayList<>();
                 nomAgenerer.add(nom);
-                temp = generateur.genererCondidat(nomAgenerer, listNoms);
+                temp = this.generateur.genererCondidat(nomAgenerer, listNoms);
             }
             score = 0.0;
             for (CoupleDeNom couple : temp) {
-                if (comparateurDeNom.comparer(couple.getNom(), couple.getNom2()) > score) {
-                    score = comparateurDeNom.comparer(couple.getNom(), couple.getNom2());
-                    temp2.add(new CoupleDenomAvecScore(new CoupleDeNom(couple.getNom(), couple.getNom2()), score));
+                if (this.comparateurDeNom.comparer(couple.getNom1(), couple.getNom2()) > score) {
+                    score = this.comparateurDeNom.comparer(couple.getNom1(), couple.getNom2());
+                    temp2.add(new CoupleDenomAvecScore(new CoupleDeNom(couple.getNom1(), couple.getNom2()), score));
 
                 }
 
-                // resultat.put(nom, score);
-
             }
-            somme += score;
 
         }
         return temp2;
-        // prochainnement on doit intégre le selectionneur
     }
 }

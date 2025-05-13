@@ -1,4 +1,6 @@
 
+
+
 // Import List for handling the list of 'Nom'
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +10,6 @@ public class SelectionneurParSeuilSimple extends SelectionneurParSeuil {
     public SelectionneurParSeuilSimple(double seuil) {
         super(seuil);
     }
-
-    
 
     @Override
     public List<CoupleDenomAvecScore> selectionner(List<CoupleDenomAvecScore> resultat) {

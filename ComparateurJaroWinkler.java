@@ -1,16 +1,14 @@
 
-/*
 import org.apache.commons.text.similarity.JaroWinklerSimilarity;
 
-public class ComparateurJaroWinkler implements ComparateurNoms {
+public class ComparateurJaroWinkler implements Comparateur {
+
     @Override
-    public double comparer(Nom nom1, Nom nom2) {
+    public double comparer(String nom1, String nom2) {
         if (nom1 != null && nom2 != null) {
             JaroWinklerSimilarity jw = new JaroWinklerSimilarity();
-            return jw.apply(nom1.getNom(), nom2.getNom()); // Compare names
-        } else {
+            return jw.apply(nom1, nom2); // Compare names
+        } else
             return 0.0; // Handle null values
-        }
     }
 }
-*/

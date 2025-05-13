@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,20 @@ public class CompositionneurStandard implements CompositionneurDeNom {
         permute(words, 0, result);
 
         return result;
+    }
+
+    private static List<Nom> changerposition(String[] mots, List<Nom> result, int order) {
+        if (mots.length <= 0) {
+            return result;
+        }
+
+        int i = 0;
+        int j = 0;
+        Nom nom = new Nom("", "");
+        for (String mot : mots) {
+
+        }
+
     }
 
     // deux méthodes statiques importées pour générer les permutations

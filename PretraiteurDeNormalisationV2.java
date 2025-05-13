@@ -1,11 +1,9 @@
+
 //bsh njarab n9asamha l les methodes as8ar bsh tet9ra 5yr ama naarash te5osh w9t akthar wlla A9AL
 import java.util.ArrayList;
 import java.util.List;
 
 public class PretraiteurDeNormalisationV2 implements Pretraiteur {
-        
-    
-
 
     private List<Nom> nomPretraited = new ArrayList<>();
 
@@ -41,7 +39,3 @@ public class PretraiteurDeNormalisationV2 implements Pretraiteur {
         return texte.trim().replaceAll("\\s+", "");
     }
 }
-
-     
-
-
