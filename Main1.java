@@ -11,7 +11,9 @@ public class Main1 {
         Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.5);
         GenerateurDeCondidat generateur = new GenerateurParTaille();
         Comparateur comparateurExact = new ComparateurExact();
+        CompositionneurDeNom compositionneur = new CompositionneurStandard();
         ComparateurNoms comparateur = new ComparateurNomsSimple(comparateurExact);
+        ComparateurNoms comparateurComposition = new ComparteurNomsParComposition(compositionneur, comparateurExact);
 
         MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur, generateur);
 
