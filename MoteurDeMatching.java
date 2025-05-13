@@ -6,7 +6,6 @@ public class MoteurDeMatching {
     private ComparateurNoms comparateurDeNom;
     private GenerateurDeCondidat generateur;
     private Pretraiteur pretraiteur;
-    private List<Nom> listeNom = new ArrayList<>();
 
     // Constructeur
     public MoteurDeMatching(Pretraiteur pretraiteur, ComparateurNoms comparateurDeNom,
