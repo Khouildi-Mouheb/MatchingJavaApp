@@ -16,4 +16,18 @@ public class CoupleDenomAvecScore {
         return score;
     }
 
+    public String toString() {
+        return "CoupleDenomAvecScore { couple = " + couplenom.getNom1()+"-"+couplenom.getNom1() + ", score = " + score + " }";
+    }
+
+    public char[] length() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'length'");
+    }
+
+	public String size() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'size'");
+	}
+
 }

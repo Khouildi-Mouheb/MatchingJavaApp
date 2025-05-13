@@ -37,7 +37,7 @@ public class Rechercher {
         }
         return m;
     }
-
+    
     public List<CoupleDenomAvecScore> rechercher(List<CoupleDeNom> condidats){
     List<CoupleDenomAvecScore> result = new ArrayList<>();
     for (CoupleDeNom couple : condidats) {
