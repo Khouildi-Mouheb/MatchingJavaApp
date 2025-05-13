@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GenerateurParTaille implements GenerateurDeCondidat {
-    private static int marge = 4;
+    private static int marge = 2;
 
     @Override
     public List<CoupleDeNom> genererCondidat(List<Nom> nomref, List<Nom> listeNoms) {
@@ -37,6 +37,7 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
         List<CoupleDeNom> candidats = new ArrayList<>();
         Map<Double, List<CoupleDeNom>> map = new HashMap<>();
 
+<<<<<<< HEAD
         for (Nom nom : listeNoms) {
             if ((nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge)) {
                 CoupleDeNom couple = new CoupleDeNom(nomref, nom);
@@ -49,5 +50,8 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
 
         return candidats;
     }
+=======
+
+>>>>>>> 18a1f65 (.......)
 
 }
