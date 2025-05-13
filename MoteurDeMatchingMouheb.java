@@ -27,6 +27,8 @@ public class MoteurDeMatchingMouheb {
     public List<CoupleDenomAvecScore> rechercherUnNomDansUneListe (Nom nomARechercher , List<Nom> leNoms){
         //praitreittement
         Nom nom=pretraiteur.nettoyer(nomARechercher);
+
+        
         List <Nom> listDesNomsAvecId = pretraiteur.nettoyer(leNoms);
         //affichage des noms apres pretraittement
         System.out.println("--------------------nom a rechercher nettoyer-------------------");

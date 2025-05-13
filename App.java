@@ -3,7 +3,7 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        RecuperateurCSV recuperateur = new RecuperateurCSV("C:\\Users\\khoui\\OneDrive\\Desktop\\peps_names_100.csv");
+        RecuperateurCSV recuperateur = new RecuperateurCSV("C:\\Users\\khoui\\OneDrive\\Desktop\\peps_names_1k.csv");
         
         // Création des composants du moteur
         PretraiteurNormalisation pretraiteur = new PretraiteurNormalisation();
