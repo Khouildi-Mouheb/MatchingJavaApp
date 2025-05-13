@@ -3,26 +3,25 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        RecuperateurCSV recuperateur = new RecuperateurCSV("C:\\Users\\khoui\\OneDrive\\Desktop\\peps_names_1k.csv");
+        RecuperateurCSV recuperateur = new RecuperateurCSV("C:\\Users\\khoui\\OneDrive\\Desktop\\peps_names_100.csv");
         
         // Création des composants du moteur
         PretraiteurNormalisation pretraiteur = new PretraiteurNormalisation();
-        GenerateurParTaille generateur = new GenerateurParTaille();
+        GenerateurPrimitif generateur = new GenerateurPrimitif();
         ComparateurExact comparateur = new ComparateurExact();
-        //SelectionneurParSeuil selectionneur = new SelectionneurParSeuil();
+        SelectionneurParSeuil selectionneur = new SelectionneurParSeuilSimple(0.9);
 
         // Initialisation du moteur de matching
-        MoteurDeMatchingMouheb moteur = new MoteurDeMatchingMouheb(pretraiteur, generateur, comparateur);
+        MoteurDeMatchingMouheb moteur = new MoteurDeMatchingMouheb(pretraiteur, generateur, comparateur,selectionneur);
 
         // Création d'un nom à rechercher
-        Nom nomARechercher = new Nom("demidovichvasilij");
+        Nom nomARechercher = new Nom("khouildi mouheb");
 
         // Création de la liste des noms candidats
         List<Nom> listeNoms = recuperateur.importData();
 
         // Exécution de la recherche
         List<CoupleDenomAvecScore> resultats = moteur.rechercherUnNomDansUneListe(nomARechercher, listeNoms);
-
         // Affichage des résultats
        // Affichage des résultats
         System.out.println("---------------------Résultats de la recherche (score > 0.9) ----------------------");
