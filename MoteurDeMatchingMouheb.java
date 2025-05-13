@@ -57,4 +57,34 @@ public class MoteurDeMatchingMouheb {
 
     }
 
+
+
+    // Méthode pour tester le Comparateur
+    public List<CoupleDenomAvecScore> comparer(List<Nom> listNoms0, List<Nom> listNoms) {
+        listNoms0 = this.pretraiteur.nettoyer(listNoms0);
+        listNoms = this.pretraiteur.nettoyer(listNoms);
+        List<CoupleDeNom> temp = new java.util.ArrayList<>();
+        List<CoupleDenomAvecScore> temp2 = new java.util.ArrayList<>();
+
+        double score = 0.0;
+        for (Nom nom : listNoms0) {
+
+            if (generateur != null) {
+
+                temp = generateur.genererCondidat(nom, listNoms);
+            }
+            score = 0.0;
+            for (CoupleDeNom couple : temp) {
+                if (comparateur.comparer(couple.getNom1().getNom(), couple.getNom2().getNom()) > score) {
+                    score = comparateur.comparer(couple.getNom1().getNom(), couple.getNom2().getNom());
+                    temp2.add(new CoupleDenomAvecScore(new CoupleDeNom(couple.getNom1(), couple.getNom2()), score));
+
+                }
+
+            }
+
+        }
+        return temp2;
+    }
+
 }
