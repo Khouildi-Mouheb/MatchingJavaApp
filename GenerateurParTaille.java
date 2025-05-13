@@ -8,16 +8,16 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
     private static int marge = 2;
 
     @Override
-    public List<CoupleDeNom> genererCondidat(List<Nom> nomref, List<Nom> listeNoms) {
-        int tailleRef = nomref.get(0).getNom().length();
+    public List<CoupleDeNom> genererCondidat(Nom nomref, List<Nom> listeNoms) {
+        int tailleRef = nomref.getNom().length();
         List<CoupleDeNom> candidats = new ArrayList<>();
         Map<Double, List<CoupleDeNom>> map = new HashMap<>();
 
         for (Nom nom : listeNoms) {
 
             if ((nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge)) {
-                candidats.add(new CoupleDeNom(nomref.get(0), nom));
-                map.put((double) nom.getNom().length(), List.of(new CoupleDeNom(nomref.get(0), nom)));
+                candidats.add(new CoupleDeNom(nomref, nom));
+                map.put((double) nom.getNom().length(), List.of());
 
             }
         }
@@ -28,8 +28,5 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
     public static void setMargeDeGeneration(int mrg) {
         GenerateurParTaille.marge = mrg;
     }
-
-
-
 
 }

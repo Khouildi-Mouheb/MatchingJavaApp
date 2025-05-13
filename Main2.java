@@ -6,28 +6,29 @@ import java.util.List;
 public class Main2 {
     public static void main(String[] args) {
         long startTime = System.nanoTime();
+        PretraiteurNormalisation pretraiteur = new PretraiteurNormalisation();
+        GenerateurPrimitif generateur = new GenerateurPrimitif();
+        SelectionneurParSeuil selectionneur = new SelectionneurParSeuilSimple(0.9);
         // Créer les dépendances pour le prétraiteur et le sélectionneur
-        Pretraiteur pretraiteur = new PretraiteurNormalisation();
-        Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.0);
-        GenerateurDeCondidat generateur = new GenerateurParTaille();
         Comparateur comparateurExact = new ComparateurExact();
         CompositionneurDeNom compositionneur = new CompositionneurStandard();
-        ComparateurNoms comparateur = new ComparateurNomsSimple(comparateurExact);
         ComparateurNoms comparateurComposition = new ComparteurNomsParComposition(compositionneur, comparateurExact);
 
-         MoteurDeMatchingMouheb moteur = new MoteurDeMatchingMouheb(pretraiteur, generateur, comparateur);
+        MoteurDeMatchingMouheb moteur1 = new MoteurDeMatchingMouheb(pretraiteur, generateur, new ComparateurExact(),
+                selectionneur);
 
         Recuperateur recuperateur = new RecuperateurCSV(
-                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_100.csv");
+                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_658k.csv");
 
         List<Nom> listeNoms1 = recuperateur.importData();
-        for (Nom nom : listeNoms1) {
-            System.out.println(nom.getNom());
-        }
+
         System.out.println("-------------------------------------------------");
-        List<Nom> listeNoms3 = moteur.dedupliquer(listeNoms1, selectionneur);
-        for (Nom nom : listeNoms3) {
-            System.out.println(nom.getNom());
+        List<CoupleDenomAvecScore> listeNoms3 = moteur1.rechercherUnNomDansUneListe(listeNoms1.get(0), listeNoms1);
+
+        System.out.println("-------------------------------------------------");
+        listeNoms3 = selectionneur.selectionner(listeNoms3);
+        for (CoupleDenomAvecScore nom : listeNoms3) {
+            System.out.println(nom.getCouple().getNom1() + " " + nom.getCouple().getNom2() + " " + nom.getScore());
         }
 
     }

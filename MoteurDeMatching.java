@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.ArrayList;
 
 public class MoteurDeMatching {
 
@@ -30,16 +29,12 @@ public class MoteurDeMatching {
         List<Nom> listNoms = listNoms1;
         for (int i = 0; i < listNomsT.size(); i++) {
             Nom nom = listNomsT.get(i);
-            System.out.println("Nom : " + nom.getNom());
-            List<CoupleDenomAvecScore> listedesnomtrouves = rechercher(nom, listNomsT);
-            // listedesnomtrouves = selectionneur.selectionner(listedesnomtrouves);
-            if (listedesnomtrouves.size() > 0) {
-                // for (CoupleDenomAvecScore couple : listedesnomtrouves) {
-                // listNoms.remove(couple.getCouple().getNom1());
 
-                // listeNoms.remove(listNoms.get(i)); // ou bien on supprime tous les possibles
-                // doublons
-            } //
+            List<CoupleDenomAvecScore> listedesnomtrouves = rechercher(nom, listNomsT);
+            System.out.println(listedesnomtrouves.size());
+            if (listedesnomtrouves.size() > 0) {
+                listNoms.remove(i);
+            }
         }
         return listNoms;
 
@@ -56,9 +51,8 @@ public class MoteurDeMatching {
         for (Nom nom : listNoms0) {
 
             if (generateur != null) {
-                List<Nom> nomAgenerer = new java.util.ArrayList<>();
-                nomAgenerer.add(nom);
-                temp = generateur.genererCondidat(nomAgenerer, listNoms);
+
+                temp = generateur.genererCondidat(nom, listNoms);
             }
             score = 0.0;
             for (CoupleDeNom couple : temp) {
