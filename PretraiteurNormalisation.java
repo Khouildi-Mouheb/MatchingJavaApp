@@ -7,11 +7,11 @@ public class PretraiteurNormalisation implements Pretraiteur {
 
     @Override
     public List<Nom> nettoyer(List<Nom> nom) {
-        for (Nom n : nom) {
+        for (int i = 0; i < nom.size(); i++) {
+            Nom n = nom.get(i);
             String valeur = n.getNom(); // pas "String nom"
             String nettoye = valeur.trim().toLowerCase().replaceAll("\\s+", "");
-            n.setNom(nettoye); // pas "nom.setNom(nettoye)"
-            nomPretraiter.add(n);
+            nomPretraiter.add(new Nom(n.getId(), nettoye));
 
         }
         return nomPretraiter;
