@@ -14,7 +14,9 @@ public class Main {
         // içi j'ajoute un exemple de recuperateur qui fonctionne avec une liste static
         // Recuperateur recuperateur = new RecuperateurStatique();
         Recuperateur recuperateur2 = new RecuperateurCSV(
-                "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_1k.csv");
+    "C:\\Users\\khoui\\OneDrive\\Desktop\\peps_names_100.csv"
+);
+
         long startTime = System.nanoTime();
         // List<Nom> listeNoms = recuperateur.importData();
         // List<Nom> listeNoms2 = recuperateur.importData();
