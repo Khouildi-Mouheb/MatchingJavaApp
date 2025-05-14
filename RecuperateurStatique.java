@@ -4,8 +4,8 @@ import java.util.List;
 
 public class RecuperateurStatique implements Recuperateur {
     Nom nomBrut1 = new Nom("Nk--sdsdfjj", " khouildi mouheb");
-    Nom nomBrut2 = new Nom("Nk-sdfjfgjjs", "mouhebkhouildi");
-    Nom nomBrut3 = new Nom("Nksjfsjfzikf", "yacine boujelbane");
+    Nom nomBrut2 = new Nom("Nk-sdfjfgjjs", "boujelbane khouildi");
+    Nom nomBrut3 = new Nom("Nksjfsjfzikf", "yacine mouheb");
 
     @Override
     public List<Nom> importData() {
