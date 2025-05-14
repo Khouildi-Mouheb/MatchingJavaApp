@@ -11,10 +11,14 @@ public class Main2 {
         SelectionneurParSeuil selectionneur = new SelectionneurParSeuilSimple(0.9);
         // Créer les dépendances pour le prétraiteur et le sélectionneur
         Comparateur comparateurExact = new ComparateurExact();
+        Comparateur comparateurLv = new ComparateurLevenshtein();
+        Comparateur comparateurJw = new ComparateurJaroWinkler();
         CompositionneurDeNom compositionneur = new CompositionneurStandard();
-        ComparateurNoms comparateurComposition = new ComparteurNomsParComposition(compositionneur, comparateurExact);
+        ComparateurNoms comparateur = new ComparateurNomsSimple(comparateurJw);
 
-        MoteurDeMatchingMouheb moteur1 = new MoteurDeMatchingMouheb(pretraiteur, generateur, new ComparateurExact(),
+        ComparateurNoms comparateurComposition = new ComparteurNomsParComposition(compositionneur, comparateurLv);
+
+        MoteurDeMatchingMouheb moteur1 = new MoteurDeMatchingMouheb(pretraiteur, generateur, comparateur,
                 selectionneur);
 
         Recuperateur recuperateur = new RecuperateurCSV(
