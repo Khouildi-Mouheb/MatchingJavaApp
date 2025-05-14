@@ -1,6 +1,4 @@
 
-
-
 // Import List for handling the list of 'Nom'
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +16,7 @@ public class SelectionneurParSeuilSimple extends SelectionneurParSeuil {
         List<CoupleDenomAvecScore> resultatSelectionne = new ArrayList<>();
 
         for (CoupleDenomAvecScore couple : resultat) {
-            if (couple.getScore() >= seuil) {
+            if ((couple.getScore()) >= seuil) {
                 resultatSelectionne.add(couple);
             }
         }

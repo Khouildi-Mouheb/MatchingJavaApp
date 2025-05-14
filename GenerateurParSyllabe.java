@@ -3,9 +3,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
-public class GenerateurParSyllabe implements GenerateurDeCondidat{
-    private List<String> extraireSyllabes(String nom){
-        return Arrays.asList(nom.toLowerCase().split(" "));
+
+public class GenerateurParSyllabe implements GenerateurDeCondidat {
+    private List<String> extraireSyllabes(String nom) {
+        return Arrays.asList(nom.toLowerCase().split("\\S+"));
     }
 
     public Map<String, List<Nom>> genererCondidatAvecSyllabe(Nom nomRef, List<Nom> listeNoms) {
@@ -24,15 +25,13 @@ public class GenerateurParSyllabe implements GenerateurDeCondidat{
         return condidats;
     }
 
-
-    public List<Nom> getListeDesCondidats (Map<String, List<Nom>> candidatsParSyllabe){
+    public List<Nom> getListeDesCondidats(Map<String, List<Nom>> candidatsParSyllabe) {
         List<Nom> listeCondidats = new ArrayList<>();
         for (List<Nom> candidats : candidatsParSyllabe.values()) {
             listeCondidats.addAll(candidats);
         }
         return listeCondidats;
     }
-
 
     @Override
     public List<CoupleDeNom> genererCondidat(Nom nomRef, List<Nom> listeNoms) {
@@ -49,8 +48,5 @@ public class GenerateurParSyllabe implements GenerateurDeCondidat{
 
         return couples;
     }
-
-
-
 
 }

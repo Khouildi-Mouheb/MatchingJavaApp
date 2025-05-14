@@ -9,8 +9,8 @@ public class PretraiteurNormalisation implements Pretraiteur {
     public List<Nom> nettoyer(List<Nom> nom) {
         for (int i = 0; i < nom.size(); i++) {
             Nom n = nom.get(i);
-            String valeur = n.getNom(); // pas "String nom"
-            if (valeur ==null){
+            String valeur = n.getNom();
+            if (valeur == null) {
                 continue;
             }
             String nettoye = valeur.trim().toLowerCase().replaceAll("\\s+", "");
@@ -21,12 +21,11 @@ public class PretraiteurNormalisation implements Pretraiteur {
     }
 
     public Nom nettoyer(Nom nom) {
-    if (nom == null || nom.getNom() == null) {
-        return null; 
+        if (nom == null || nom.getNom() == null) {
+            return null;
+        }
+        String nettoye = nom.getNom().trim().toLowerCase().replaceAll("\\s+", "");
+        return new Nom(nom.getId(), nettoye);
     }
-    String nettoye = nom.getNom().trim().toLowerCase().replaceAll("\\s+", "");
-    return new Nom(nom.getId(), nettoye);
-    }
-
 
 }

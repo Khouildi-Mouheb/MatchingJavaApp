@@ -2,15 +2,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoteurDeMatchingMouheb {
-    private PretraiteurNormalisation pretraiteur;
-    private GenerateurPrimitif generateur;
-    private ComparateurExact comparateur;
-    private SelectionneurParSeuil selectionneur;
+public class MoteurDeMatchingM {
+    private Pretraiteur pretraiteur;
+    private GenerateurDeCondidat generateur;
+    private ComparateurNoms comparateur;
+    private Selectionneur selectionneur;
 
     // Constructeur
-    public MoteurDeMatchingMouheb(PretraiteurNormalisation pretraiteur, GenerateurPrimitif generateur,
-            ComparateurExact comparateur, SelectionneurParSeuil selectionneur) {
+    public MoteurDeMatchingM(Pretraiteur pretraiteur, GenerateurDeCondidat generateur,
+            ComparateurNoms comparateur, Selectionneur selectionneur) {
         this.pretraiteur = pretraiteur;
         this.generateur = generateur;
         this.comparateur = comparateur;
@@ -19,7 +19,7 @@ public class MoteurDeMatchingMouheb {
 
     // le methode de recherche
 
-    public List<CoupleDenomAvecScore> rechercherUnNomDansUneListe(Nom nomARechercher, List<Nom> leNoms) {
+    public List<CoupleDenomAvecScore> rechercher(Nom nomARechercher, List<Nom> leNoms) {
         // praitreittement de la nom a rechercher
         List<Nom> l = new ArrayList<>();
         l.add(nomARechercher);
@@ -31,11 +31,7 @@ public class MoteurDeMatchingMouheb {
         System.out.println("--------------------nom a rechercher nettoyer-------------------");
         System.out.println(nomNettoyer.getNom());
         System.out.println("--------------------liste nettoyer-------------------");
-        /*
-         * for (Nom n : listDesNomsAvecId){
-         * System.out.println(n.getNom());
-         * }
-         */
+
         // generation des condidats
         System.out.println("--------------------les condidats-------------------");
         List<CoupleDeNom> condidats = generateur.genererCondidat(ln.get(0), listDesNomsAvecId);
@@ -43,7 +39,8 @@ public class MoteurDeMatchingMouheb {
         // comparaison
         List<CoupleDenomAvecScore> resultatDeComparaison = new ArrayList<>();
         for (CoupleDeNom cond : condidats) {
-            resultatDeComparaison.add(comparateur.comparer(cond));
+            resultatDeComparaison
+                    .add(new CoupleDenomAvecScore(cond, comparateur.comparer(cond.getNom1(), cond.getNom2())));
         }
         System.out.println("--------------------resultat de comparaison-------------------");
         for (CoupleDenomAvecScore cps : resultatDeComparaison) {
@@ -56,8 +53,6 @@ public class MoteurDeMatchingMouheb {
         return resultat;
 
     }
-
-
 
     // Méthode pour tester le Comparateur
     public List<CoupleDenomAvecScore> comparer(List<Nom> listNoms0, List<Nom> listNoms) {
@@ -75,8 +70,8 @@ public class MoteurDeMatchingMouheb {
             }
             score = 0.0;
             for (CoupleDeNom couple : temp) {
-                if (comparateur.comparer(couple.getNom1().getNom(), couple.getNom2().getNom()) > score) {
-                    score = comparateur.comparer(couple.getNom1().getNom(), couple.getNom2().getNom());
+                if (comparateur.comparer(couple.getNom1(), couple.getNom2()) > score) {
+                    score = comparateur.comparer(couple.getNom1(), couple.getNom2());
                     temp2.add(new CoupleDenomAvecScore(new CoupleDeNom(couple.getNom1(), couple.getNom2()), score));
 
                 }
