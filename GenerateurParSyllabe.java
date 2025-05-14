@@ -3,21 +3,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Arrays;
+public class GenerateurParSyllabe implements GenerateurDeCondidat{
+    private List<String> extraireSyllabes(Nom nom) {
+        List<String> syllabes = Arrays.asList(nom.getNom().toLowerCase().split(" "));
 
-public class GenerateurParSyllabe implements GenerateurDeCondidat {
-    private List<String> extraireSyllabes(String nom) {
-        return Arrays.asList(nom.toLowerCase().split("\\S+"));
+        return syllabes;
     }
 
     public Map<String, List<Nom>> genererCondidatAvecSyllabe(Nom nomRef, List<Nom> listeNoms) {
         Map<String, List<Nom>> condidats = new HashMap<>();
-        List<String> syllabesRef = extraireSyllabes(nomRef.getNom());
+        List<String> syllabesRef = extraireSyllabes(nomRef);
+        // Affichage des syllabes extraites pour le débogage
+        //System.out.println("Syllabes extraites pour " + nomRef.getNom());
+        /*
+        for(String syllabe : syllabesRef) {
+            System.out.println(syllabe);
+        }
+        */
         for (String syllabe : syllabesRef) {
-            condidats.put(syllabe, new ArrayList<>());
+            condidats.putIfAbsent(syllabe, new ArrayList<>());
         }
         for (Nom nom : listeNoms) {
             for (String syllabe : syllabesRef) {
-                if (nom.getNom().contains(syllabe)) {
+                if (Arrays.asList(nom.getNom().toLowerCase().split("\\s+")).contains(syllabe)) {
                     condidats.get(syllabe).add(nom);
                 }
             }
@@ -25,13 +33,15 @@ public class GenerateurParSyllabe implements GenerateurDeCondidat {
         return condidats;
     }
 
-    public List<Nom> getListeDesCondidats(Map<String, List<Nom>> candidatsParSyllabe) {
+
+    public List<Nom> getListeDesCondidats (Map<String, List<Nom>> candidatsParSyllabe){
         List<Nom> listeCondidats = new ArrayList<>();
         for (List<Nom> candidats : candidatsParSyllabe.values()) {
             listeCondidats.addAll(candidats);
         }
         return listeCondidats;
     }
+
 
     @Override
     public List<CoupleDeNom> genererCondidat(Nom nomRef, List<Nom> listeNoms) {
@@ -48,5 +58,8 @@ public class GenerateurParSyllabe implements GenerateurDeCondidat {
 
         return couples;
     }
+
+
+
 
 }
