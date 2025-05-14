@@ -2,15 +2,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoteurDeMatchingMouheb {
-    private PretraiteurNormalisation pretraiteur;
-    private GenerateurPrimitif generateur;
+public class MoteurDeMatchingM {
+    private Pretraiteur pretraiteur;
+    private GenerateurDeCondidat generateur;
     private ComparateurNoms comparateur;
-    private SelectionneurParSeuil selectionneur;
+    private Selectionneur selectionneur;
 
     // Constructeur
-    public MoteurDeMatchingMouheb(PretraiteurNormalisation pretraiteur, GenerateurPrimitif generateur,
-            ComparateurNoms comparateur, SelectionneurParSeuil selectionneur) {
+    public MoteurDeMatchingM(Pretraiteur pretraiteur, GenerateurDeCondidat generateur,
+            ComparateurNoms comparateur, Selectionneur selectionneur) {
         this.pretraiteur = pretraiteur;
         this.generateur = generateur;
         this.comparateur = comparateur;
@@ -19,7 +19,7 @@ public class MoteurDeMatchingMouheb {
 
     // le methode de recherche
 
-    public List<CoupleDenomAvecScore> rechercherUnNomDansUneListe(Nom nomARechercher, List<Nom> leNoms) {
+    public List<CoupleDenomAvecScore> rechercher(Nom nomARechercher, List<Nom> leNoms) {
         // praitreittement de la nom a rechercher
         List<Nom> l = new ArrayList<>();
         l.add(nomARechercher);
@@ -72,6 +72,8 @@ public class MoteurDeMatchingMouheb {
             for (CoupleDeNom couple : temp) {
                 if (comparateur.comparer(couple.getNom1(), couple.getNom2()) > score) {
                     score = comparateur.comparer(couple.getNom1(), couple.getNom2());
+                    temp2.add(new CoupleDenomAvecScore(new CoupleDeNom(couple.getNom1(), couple.getNom2()), score));
+
                 }
 
             }

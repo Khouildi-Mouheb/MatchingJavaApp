@@ -7,6 +7,7 @@ public class Main3 {
         Pretraiteur pretraiteur = new PretraiteurNormalisation();
         Selectionneur selectionneur = new SelectionneurParSeuilSimple(0.0);
         GenerateurDeCondidat generateur = new GenerateurParTaille();
+        GenerateurDeCondidat generateur1 = new GenerateurParSyllabe();
         Comparateur comparateurExact = new ComparateurExact();
         Comparateur comparateurLv = new ComparateurLevenshtein();
         CompositionneurDeNom compositionneur = new CompositionneurStandard();
@@ -14,7 +15,7 @@ public class Main3 {
         ComparateurNoms comparateurComposition = new ComparteurNomsParComposition(compositionneur, comparateurExact);
 
         MoteurDeMatching moteur = new MoteurDeMatching(pretraiteur, comparateur, generateur);
-
+        MoteurDeMatchingM moteur1 = new MoteurDeMatchingM(pretraiteur, generateur, comparateur, selectionneur);
         Recuperateur recuperateur = new RecuperateurCSV(
                 "C:\\Users\\win10\\OneDrive\\Bureau\\work\\ENIT\\JAVA\\peps_names_1k.csv");
         Recuperateur recuperateur2 = new RecuperateurCSV(
@@ -24,12 +25,13 @@ public class Main3 {
         List<Nom> listeNoms2 = recuperateur2.importData();
 
         System.out.println("-------------------------------------------------");
-        List<CoupleDenomAvecScore> listeNoms3 = moteur.rechercher(listeNoms2.get(0), listeNoms1);
+        List<CoupleDenomAvecScore> listeNoms3 = moteur1.rechercher(listeNoms2.get(0), listeNoms2);
         int i = 0;
         for (CoupleDenomAvecScore couple : listeNoms3) {
 
             System.out.println(
-                    couple.getCouple().getNom1() + " : " + couple.getCouple().getNom2() + " " + couple.getScore() + i);
+                    couple.getCouple().getNom1() + " : " + couple.getCouple().getNom2() + " " + couple.getScore()
+                            + " --" + i);
             i++;
         }
 

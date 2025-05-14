@@ -10,19 +10,33 @@ public class GenerateurParTaille implements GenerateurDeCondidat {
     @Override
     public List<CoupleDeNom> genererCondidat(Nom nomref, List<Nom> listeNoms) {
         int tailleRef = nomref.getNom().length();
-        List<CoupleDeNom> candidats = new ArrayList<>();
-        Map<Double, List<CoupleDeNom>> map = new HashMap<>();
+
+        Map<Nom, List<CoupleDeNom>> map = new HashMap<>();
 
         for (Nom nom : listeNoms) {
+            List<CoupleDeNom> candidats = new ArrayList<>();
+            String[] words = nom.getNom().split("\\S+");
 
-            if ((nom.getNom().length() == tailleRef || nom.getNom().length() <= tailleRef + marge)) {
+            if ((nomref.getNom().split("\\S+").length == words.length)
+                    && (nom.getNom().length() >= tailleRef - marge && nom.getNom().length() <= tailleRef + marge)) {
                 candidats.add(new CoupleDeNom(nomref, nom));
-                map.put((double) nom.getNom().length(), List.of());
 
             }
-        }
+            map.putIfAbsent(nomref, candidats);
 
-        return candidats;
+        }
+        getListeDesCondidats(map);
+
+        return getListeDesCondidats(map);
+
+    }
+
+    public List<CoupleDeNom> getListeDesCondidats(Map<Nom, List<CoupleDeNom>> candidatsParSyllabe) {
+        List<CoupleDeNom> listeCondidats = new ArrayList<>();
+        for (List<CoupleDeNom> candidats : candidatsParSyllabe.values()) {
+            listeCondidats.addAll(candidats);
+        }
+        return listeCondidats;
     }
 
     public static void setMargeDeGeneration(int mrg) {

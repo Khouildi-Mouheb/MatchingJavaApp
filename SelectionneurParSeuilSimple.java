@@ -16,8 +16,7 @@ public class SelectionneurParSeuilSimple extends SelectionneurParSeuil {
         List<CoupleDenomAvecScore> resultatSelectionne = new ArrayList<>();
 
         for (CoupleDenomAvecScore couple : resultat) {
-            if ((couple.getScore() - (double) (couple.getCouple().getNom1().getNom().hashCode()
-                    / 10000000)) >= seuil) {
+            if ((couple.getScore()) >= seuil) {
                 resultatSelectionne.add(couple);
             }
         }
